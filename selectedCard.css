@@ -1,0 +1,147 @@
+.selected-cards {
+    background-color: rgba(0, 0, 0, 0.85);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.selected-container {
+    margin: 40px 0;
+}
+
+#player-2, #player-3, #player-4 {
+    display: none;
+} 
+
+.only-cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.form-card {
+    width: 250px;
+    height: 375px;
+    background-color: green;
+    border: 2px outset darkgreen;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-card {
+    width: 90%;
+    height: 8.5%;
+    background-color: rgba(255, 255, 255, 0.6);
+    margin-top: 5%;
+    border-radius: 2px 2px 0 0;
+    display: flex;
+}
+
+.number-card {
+    width: 18.5%;
+    height: 100%;
+    background-color: blueviolet;
+    border-radius: 2px 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.number-card p {
+    font-size: 1.5em;
+}
+
+.name-card {
+    width: 81.5%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-card p {
+    font-size: 1.5em;
+}
+
+.image-card {
+    width: 90%;
+    height: 40%;
+    background-color: rgb(139, 2, 2);
+}
+
+.atributes-card {
+    width: 90%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 12.5px;
+}
+
+.button-card {
+    border: none;
+    width: 100%;
+    height: 18.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: lightgoldenrodyellow;
+    color: black;
+}
+
+.button-card:hover:enabled {
+    cursor: pointer;
+    background-color: gold;
+    border: 1px solid goldenrod;
+}
+
+.button-card.chosen{
+    background-color: #ff4d4d;
+}
+
+.atrib-text {
+    font-size: 1.2em;
+    margin-left: 0.5em;
+}
+
+.atrib-value {
+    font-size: 1.5em;
+    margin-right: 0.5em;
+}
+
+#text-result {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
+    color: white;
+    margin-top: 25px;
+}
+
+#btn-selected-cards {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+#btn-selected-cards button {
+    width: 150px;
+    height: 50px;
+    background-color: darkred;
+    color: white;
+    font-size: 1.2em;
+    border: 2px outset darkred;
+    border-radius: 3px;
+    cursor: pointer
+}
+
+#btn-selected-cards button:hover {
+    background-color: red;
+}
