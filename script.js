@@ -10,6 +10,7 @@ const deck2 = document.querySelector('#deck-2');
 const deck3 = document.querySelector('#deck-3');
 const deck4 = document.querySelector('#deck-4');
 const deckCenter = document.querySelector('#center-deck');
+const infoPlayers = [];
 const atribButtons1 = document.querySelector('#player-1').getElementsByClassName('button-card');
 const atrib1 = document.querySelector('#player-1').querySelector('.atributes-card');
 const atrib2 = document.querySelector('#player-2').querySelector('.atributes-card');
@@ -23,9 +24,12 @@ countPlayers(numbPlayers);
 
 function countPlayers(nPlayers) {
     for(let i = 1; i < nPlayers + 1; i++){
-        decks.push(document.querySelector(`#deck-${i}`))
+        decks.push(document.querySelector(`#deck-${i}`));
+        infoPlayers.push(document.querySelector(`#info-pl-${i}`));
+        infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
     }
     addCard();
+    infoCards(nPlayers);
 }
 
 function addCard() {
@@ -50,31 +54,33 @@ function addCard() {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
         card.setAttribute('id', `deck-1-card-${i}`);
-        card.style.left = `${(i-1)*10}px`;
         deck1.appendChild(card);
     }
     for(let i = 1; i < numbCardInit + 1; i++) {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
         card.setAttribute('id', `deck-2-card-${i}`);
-        card.style.top = `${(i-1)*10}px`;
         deck2.appendChild(card);
     }
     for(let i = 1; i < numbCardInit + 1; i++) {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
         card.setAttribute('id', `deck-3-card-${i}`);
-        card.style.right = `${(i-1)*10}px`;
         deck3.appendChild(card);
     }
     for(let i = 1; i < numbCardInit + 1; i++) {
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
         card.setAttribute('id', `deck-4-card-${i}`);
-        card.style.bottom = `${(i-1)*10}px`;
         deck4.appendChild(card);
     }
 };
+
+function infoCards(nPlayers) {
+    for(let i = 0; i < nPlayers; i++) {
+        infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;      
+    }
+}
 
 mainPlayBtn.addEventListener('click', function() {
 
@@ -200,29 +206,19 @@ function distrCard(idPlayer, cardsCount) {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
             card.setAttribute('id', `deck-${idPlayer}-card-${i}`);
-            if(idPlayer == 1) {
-                card.style.left = `${(i-1)*10}px`;
-            } else if(idPlayer == 2) {
-                card.style.top = `${(i-1)*10}px`;
-            } else if(idPlayer == 3) {
-                card.style.right = `${(i-1)*10}px`;
-            } else if(idPlayer == 4) {
-                card.style.bottom = `${(i-1)*10}px`;
-            }
             deckWinner.appendChild(card);
         }
         while(deckCenter.lastChild) {
             deckCenter.removeChild(deckCenter.lastChild);
         } 
-
     } else {
         for(let i = numbCardsCenterDeck; i < cardsCount + numbCardsCenterDeck; i++) {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
             card.setAttribute('id', `deck-${idPlayer}-card-${i}`);
-            card.style.left = `${(i)*10}px`;
             deckCenter.appendChild(card);
         }
     }
+    infoCards(numbPlayers);
 };
 

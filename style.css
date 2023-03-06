@@ -21,17 +21,18 @@
 }
 
 #center-deck {
-    width: 100px;
+    width: 200px;
     height: 100px;
     background-color: rgba(0, 0, 0, 0);
     border: 1px solid black;
     position: relative;
+    display: flex;
 }
 
 #main-play-btn {
     width: 100px;
     height: 50px;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,25 +48,52 @@
     background-color: red;
 }
 
-.decks {
-    width: 100px;
-    height: 100px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 1px solid black;
+.player-container {
+    display: flex;
     position: absolute;
 }
 
-#deck-1 {
+.player-container.horizontal {
+    width: 200px;
+    height: 100px;
+}
+.player-container.vertical {
+    width: 100px;
+    height: 200px;
+}
+
+#pc-1 {
     bottom: 0;
 }
-#deck-2 {
+#pc-2 {
     right: 0;
 }
-#deck-3 {
+#pc-3 {
     top: 0;
 }
-#deck-4 {
+#pc-4 {
     left: 0;
+}
+
+.decks {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid black;
+}
+
+#deck-1 {
+    flex-direction: row;
+}
+#deck-2 {
+    flex-direction: column-reverse;
+}
+#deck-3 {
+    flex-direction: row-reverse;
+}
+#deck-4 {
+    flex-direction: column;
 }
 
 .card {
@@ -73,6 +101,36 @@
     height: 100px;
     border: 1px solid black;
     background-color: green;
-    position: absolute;
+}
+.card:last-child {
+    flex-shrink: 0;
 }
 
+.board-players {
+    display: flex;
+    justify-content: space-around;
+    width: 250px;
+    height: 80px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    background-color: greenyellow;
+    border-radius: 3px;
+}
+
+.info-player {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.info-player:not(:last-child) {
+    border-right: 1px solid white;
+}
+
+.info-player p {
+    margin-top: 10px;
+}
