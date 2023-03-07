@@ -33,8 +33,6 @@ function countPlayers(nPlayers) {
 }
 
 function addCard() {
-
-    /*
     let indexDeck = 0; 
 
     for(let i = 1; i < numbTotalCards + 1; i++) {
@@ -46,33 +44,6 @@ function addCard() {
         if(i === (indexDeck+1)*numbCardInit) {
             indexDeck++;
         }
-    }
-    */
-    
-
-    for(let i = 1; i < numbCardInit + 1; i++) {
-        const card = document.createElement('div');
-        card.setAttribute('class', 'card');
-        card.setAttribute('id', `deck-1-card-${i}`);
-        deck1.appendChild(card);
-    }
-    for(let i = 1; i < numbCardInit + 1; i++) {
-        const card = document.createElement('div');
-        card.setAttribute('class', 'card');
-        card.setAttribute('id', `deck-2-card-${i}`);
-        deck2.appendChild(card);
-    }
-    for(let i = 1; i < numbCardInit + 1; i++) {
-        const card = document.createElement('div');
-        card.setAttribute('class', 'card');
-        card.setAttribute('id', `deck-3-card-${i}`);
-        deck3.appendChild(card);
-    }
-    for(let i = 1; i < numbCardInit + 1; i++) {
-        const card = document.createElement('div');
-        card.setAttribute('class', 'card');
-        card.setAttribute('id', `deck-4-card-${i}`);
-        deck4.appendChild(card);
     }
 };
 
@@ -181,7 +152,7 @@ function compareValues(id) {
     }
 
     if(maxCount === 1) {
-        distrCard(idWinners, 4);
+        distrCard(idWinners, numbPlayers);
         textResult.querySelector('p').innerText = `O jogador ${idWinners} foi o vencedor`;
     } else {
         distrCard(0, 4);
