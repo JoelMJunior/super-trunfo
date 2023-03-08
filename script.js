@@ -1,7 +1,6 @@
 let numbPlayers = 4;
-let numbTotalCards = 32;
-let numbCardInit = 8; 
-let auxSelecCards = false;
+let numbTotalCards = 12;
+let numbCardInit = 3; 
 const mainPlayBtn = document.querySelector('#main-play-btn');
 const secSelecCards = document.querySelector('.selected-cards');
 const decks = [];
@@ -49,34 +48,30 @@ function addCard() {
 
 function infoCards(nPlayers) {
     for(let i = 0; i < nPlayers; i++) {
-        infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;      
+        infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;
+        if(decks[i].childElementCount === 0) {
+            closeSelecCards();
+            numbPlayers -= 1;
+            delete decks[i];
+            console.log(`O jogador ${i+1} perdeu.`);
+            console.log(decks);
+        }      
     }
 }
 
-mainPlayBtn.addEventListener('click', function() {
+mainPlayBtn.addEventListener('click', openSelecCards);
 
+btnSelecCards.addEventListener('click', closeSelecCards);
+
+function openSelecCards(){
     secSelecCards.style.display = 'block';
-    auxSelecCards = true;      
-});
+};
 
-btnSelecCards.addEventListener('click', function() {
-
+function closeSelecCards() {
     secSelecCards.style.display = 'none';  
     showAdvCards("off");
     disableBtn(atribButtons1.length);
-    auxSelecCards = false;
-});
-
-/*
-function removeCard(i) {
-    const deckId = i.substring(5,6);
-    const cardId = i.substring(12,13);
-    const card = document.querySelector(`#deck-${deckId}-card-${cardId}`);
-    if(card != null) {
-        card.remove(this);
-    }
 };
-*/
 
 for(let i = 0; i < atribButtons1.length; i++) {
     atribButtons1[i].addEventListener('click', () => {
@@ -107,7 +102,7 @@ function showAdvCards(turn) {
 function disableBtn(id) {
     const allAtribBtns = document.getElementsByClassName('button-card');
     
-    if(id < 4) {
+    if(id < atribButtons1.length) {
         atrib1.children[id].classList.add('chosen');
         atrib2.children[id].classList.add('chosen');
         atrib3.children[id].classList.add('chosen');
@@ -125,6 +120,7 @@ function disableBtn(id) {
 };
 
 function compareValues(id) {
+    
     const value1 = Number(atrib1.children[id].querySelector('.atrib-value').textContent);
     const value2 = Number(atrib2.children[id].querySelector('.atrib-value').textContent);
     const value3 = Number(atrib3.children[id].querySelector('.atrib-value').textContent);
@@ -155,7 +151,7 @@ function compareValues(id) {
         distrCard(idWinners, numbPlayers);
         textResult.querySelector('p').innerText = `O jogador ${idWinners} foi o vencedor`;
     } else {
-        distrCard(0, 4);
+        distrCard(0, numbPlayers);
         textResult.querySelector('p').innerText = `Os jogadores ${idWinners.join(', ')} empataram`;
     }
     textResult.style.display = 'flex';
@@ -164,7 +160,9 @@ function compareValues(id) {
 function distrCard(idPlayer, cardsCount) {
     
     for(d of decks) {
-        d.removeChild(d.lastChild);
+        if(d != undefined) {
+            d.removeChild(d.lastChild);
+        }
     }
     
     const numbCardsCenterDeck = deckCenter.children.length;
