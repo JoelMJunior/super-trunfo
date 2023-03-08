@@ -4,17 +4,10 @@ let numbCardInit = 3;
 const mainPlayBtn = document.querySelector('#main-play-btn');
 const secSelecCards = document.querySelector('.selected-cards');
 const decks = [];
-const deck1 = document.querySelector('#deck-1');
-const deck2 = document.querySelector('#deck-2');
-const deck3 = document.querySelector('#deck-3');
-const deck4 = document.querySelector('#deck-4');
 const deckCenter = document.querySelector('#center-deck');
 const infoPlayers = [];
 const atribButtons1 = document.querySelector('#player-1').getElementsByClassName('button-card');
-const atrib1 = document.querySelector('#player-1').querySelector('.atributes-card');
-const atrib2 = document.querySelector('#player-2').querySelector('.atributes-card');
-const atrib3 = document.querySelector('#player-3').querySelector('.atributes-card');
-const atrib4 = document.querySelector('#player-4').querySelector('.atributes-card');
+const atribPlayers = [];
 const textResult = document.querySelector('#text-result');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
 
@@ -26,6 +19,7 @@ function countPlayers(nPlayers) {
         decks.push(document.querySelector(`#deck-${i}`));
         infoPlayers.push(document.querySelector(`#info-pl-${i}`));
         infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
+        atribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.atributes-card'));
     }
     addCard();
     infoCards(nPlayers);
@@ -48,14 +42,17 @@ function addCard() {
 
 function infoCards(nPlayers) {
     for(let i = 0; i < nPlayers; i++) {
-        infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;
-        if(decks[i].childElementCount === 0) {
-            closeSelecCards();
-            numbPlayers -= 1;
-            delete decks[i];
-            console.log(`O jogador ${i+1} perdeu.`);
-            console.log(decks);
-        }      
+        if(decks[i] != undefined) {
+            infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;
+            if(decks[i].childElementCount === 0) {
+                closeSelecCards();
+                numbPlayers -= 1;
+                delete decks[i];
+                delete atribPlayers[i];
+                console.log(`O jogador ${i+1} perdeu.`);
+                console.log(decks);
+            }      
+        }
     }
 }
 
@@ -63,7 +60,7 @@ mainPlayBtn.addEventListener('click', openSelecCards);
 
 btnSelecCards.addEventListener('click', closeSelecCards);
 
-function openSelecCards(){
+function openSelecCards() {
     secSelecCards.style.display = 'block';
 };
 
@@ -103,11 +100,11 @@ function disableBtn(id) {
     const allAtribBtns = document.getElementsByClassName('button-card');
     
     if(id < atribButtons1.length) {
-        atrib1.children[id].classList.add('chosen');
-        atrib2.children[id].classList.add('chosen');
-        atrib3.children[id].classList.add('chosen');
-        atrib4.children[id].classList.add('chosen');
-        
+        for(ap of atribPlayers) {
+            if(ap != undefined) {
+                ap.children[id].classList.add('chosen');
+            }
+        }
         for(let i = 0; i < allAtribBtns.length; i++) {
             allAtribBtns[i].disabled = true;
         }
@@ -121,31 +118,29 @@ function disableBtn(id) {
 
 function compareValues(id) {
     
-    const value1 = Number(atrib1.children[id].querySelector('.atrib-value').textContent);
-    const value2 = Number(atrib2.children[id].querySelector('.atrib-value').textContent);
-    const value3 = Number(atrib3.children[id].querySelector('.atrib-value').textContent);
-    const value4 = Number(atrib4.children[id].querySelector('.atrib-value').textContent);
-
-    const maxValue = Math.max(value1, value2, value3, value4);
+    let values = [];
+    for(ap of atribPlayers) {
+        if(ap != undefined) {
+            values.push(Number(ap.children[id].querySelector('.atrib-value').textContent));
+        } else {
+            values.push(-Infinity);
+        }
+    };
+    console.log(values);
+    
+    const maxValue = values.reduce(function(a, b) {
+        return Math.max(a, b);
+    }, -Infinity);
+   
     let maxCount = 0;
     let idWinners = [];
     
-    if(maxValue === value1) {
-        maxCount++;
-        idWinners.push('1');
-    }
-    if(maxValue === value2){
-        maxCount++;
-        idWinners.push('2');
-    }
-    if(maxValue === value3){
-        maxCount++;
-        idWinners.push('3');
-    }
-    if(maxValue === value4){
-        maxCount++;
-        idWinners.push('4');
-    }
+    for(let i = 0; i < values.length; i++) {
+        if(values[i] === maxValue) {
+            maxCount++;
+            idWinners.push(i+1);
+        }
+    };
 
     if(maxCount === 1) {
         distrCard(idWinners, numbPlayers);
