@@ -1,4 +1,4 @@
-> Corrigir se as cartas dos jogadores que perderam ainda aparecem na parte das cartas selecionadas.
+> Corrigir o número de cartas que aparecem na info.
 > Em caso de empate, apenas os jogadores que empataram podem jogar.
 > Revisar 'while' em distrCard.
 > Alterar os atributos e nomes das cartas de acordo com seu id.

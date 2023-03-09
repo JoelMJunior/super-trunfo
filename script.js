@@ -6,6 +6,7 @@ const secSelecCards = document.querySelector('.selected-cards');
 const decks = [];
 const deckCenter = document.querySelector('#center-deck');
 const infoPlayers = [];
+const cardsSelec = [];
 const atribButtons1 = document.querySelector('#player-1').getElementsByClassName('button-card');
 const atribPlayers = [];
 const textResult = document.querySelector('#text-result');
@@ -19,6 +20,7 @@ function countPlayers(nPlayers) {
         decks.push(document.querySelector(`#deck-${i}`));
         infoPlayers.push(document.querySelector(`#info-pl-${i}`));
         infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
+        cardsSelec.push(document.querySelector(`#player-${i}`));
         atribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.atributes-card'));
     }
     addCard();
@@ -48,6 +50,7 @@ function infoCards(nPlayers) {
                 closeSelecCards();
                 numbPlayers -= 1;
                 delete decks[i];
+                delete cardsSelec[i];
                 delete atribPlayers[i];
                 console.log(`O jogador ${i+1} perdeu.`);
                 console.log(decks);
@@ -81,15 +84,18 @@ for(let i = 0; i < atribButtons1.length; i++) {
 
 function showAdvCards(turn) {
     if(turn === "on") {
-        for(let i = 2; i < numbPlayers+1; i++) {
-            const cardPlayer = document.querySelector(`#player-${i}`);
-            cardPlayer.style.display = 'flex';
+        for(cs of cardsSelec) {
+            if(cs != undefined) {
+                console.log(cs);
+                cs.style.display = 'flex';
+            }
         }
         btnSelecCards.style.display = 'flex';
     } else {
-        for(let i = 2; i < numbPlayers+1; i++) {
-            const cardPlayer = document.querySelector(`#player-${i}`);
-            cardPlayer.style.display = 'none';
+        for(cs of cardsSelec) {
+            if(cs != undefined && cs != cardsSelec[0]) {
+                cs.style.display = 'none';
+            }
         }
         btnSelecCards.style.display = 'none';
         textResult.style.display = 'none';
