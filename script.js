@@ -11,6 +11,8 @@ const atribButtons1 = document.querySelector('#player-1').getElementsByClassName
 const atribPlayers = [];
 const textResult = document.querySelector('#text-result');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
+let maxCount = 0;
+let idWinners = [];
 
 
 countPlayers(numbPlayers);
@@ -24,26 +26,29 @@ function countPlayers(nPlayers) {
         atribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.atributes-card'));
     }
     addCard();
-    infoCards(nPlayers);
-}
+    infoCards();
+};
 
 function addCard() {
-    let indexDeck = 0; 
+    let indexDeck = 0;
+    let indexCard = 0; 
 
     for(let i = 1; i < numbTotalCards + 1; i++) {
+        indexCard += 1;
         const card = document.createElement('div');
         card.setAttribute('class', 'card');
-        card.setAttribute('id', `deck-1-card-${i}`);
+        card.setAttribute('id', `deck-${indexDeck+1}-card-${indexCard}`);
         
         decks[indexDeck].appendChild(card);
         if(i === (indexDeck+1)*numbCardInit) {
             indexDeck++;
+            indexCard = 0;
         }
     }
 };
 
-function infoCards(nPlayers) {
-    for(let i = 0; i < nPlayers; i++) {
+function infoCards() {
+    for(let i = 0; i < decks.length; i++) {
         if(decks[i] != undefined) {
             infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;
             if(decks[i].childElementCount === 0) {
@@ -52,12 +57,10 @@ function infoCards(nPlayers) {
                 delete decks[i];
                 delete cardsSelec[i];
                 delete atribPlayers[i];
-                console.log(`O jogador ${i+1} perdeu.`);
-                console.log(decks);
             }      
         }
     }
-}
+};
 
 mainPlayBtn.addEventListener('click', openSelecCards);
 
@@ -77,6 +80,7 @@ for(let i = 0; i < atribButtons1.length; i++) {
     atribButtons1[i].addEventListener('click', () => {
         showAdvCards("on");
         disableBtn(i);
+        takeCards();
         compareValues(i);
     });
     
@@ -86,8 +90,15 @@ function showAdvCards(turn) {
     if(turn === "on") {
         for(cs of cardsSelec) {
             if(cs != undefined) {
-                console.log(cs);
-                cs.style.display = 'flex';
+                if(maxCount > 1) {
+                    idWinners.forEach((ids) => {
+                        if(cardsSelec.indexOf(cs) === ids-1) {
+                            cs.style.display = 'flex';
+                        }
+                    });
+                } else {
+                    cs.style.display = 'flex';
+                }
             }
         }
         btnSelecCards.style.display = 'flex';
@@ -122,12 +133,35 @@ function disableBtn(id) {
     }
 };
 
+function takeCards() {
+    for(d of decks) {
+        if(d != undefined) {
+            if(maxCount > 1) {
+                idWinners.forEach((ids) => {
+                    if(decks.indexOf(d) === ids-1) {
+                        d.removeChild(d.lastChild);
+                    }
+                });
+            } else {
+                d.removeChild(d.lastChild);
+            }
+        }
+    }
+};
+
 function compareValues(id) {
-    
     let values = [];
     for(ap of atribPlayers) {
         if(ap != undefined) {
-            values.push(Number(ap.children[id].querySelector('.atrib-value').textContent));
+            if(maxCount > 1) {
+                if(idWinners.includes(atribPlayers.indexOf(ap)+1)) {
+                    values.push(Number(ap.children[id].querySelector('.atrib-value').textContent));
+                } else {
+                    values.push(-Infinity);
+                }
+            } else {
+                values.push(Number(ap.children[id].querySelector('.atrib-value').textContent));
+            }
         } else {
             values.push(-Infinity);
         }
@@ -137,9 +171,9 @@ function compareValues(id) {
     const maxValue = values.reduce(function(a, b) {
         return Math.max(a, b);
     }, -Infinity);
-   
-    let maxCount = 0;
-    let idWinners = [];
+    
+    maxCount = 0;
+    idWinners = [];
     
     for(let i = 0; i < values.length; i++) {
         if(values[i] === maxValue) {
@@ -148,31 +182,36 @@ function compareValues(id) {
         }
     };
 
+    console.log(numberRoundCards(values));
+
     if(maxCount === 1) {
-        distrCard(idWinners, numbPlayers);
+        distrCard(idWinners, numberRoundCards(values));
         textResult.querySelector('p').innerText = `O jogador ${idWinners} foi o vencedor`;
     } else {
-        distrCard(0, numbPlayers);
+        distrCard(0, numberRoundCards(values));
         textResult.querySelector('p').innerText = `Os jogadores ${idWinners.join(', ')} empataram`;
     }
     textResult.style.display = 'flex';
 };
 
-function distrCard(idPlayer, cardsCount) {
-    
-    for(d of decks) {
-        if(d != undefined) {
-            d.removeChild(d.lastChild);
+function numberRoundCards(vals) {
+    nrCards = 0;
+    vals.forEach((value) => {
+        if(value != -Infinity) {
+            nrCards++;
         }
-    }
-    
+    });
+    return nrCards;
+};
+
+function distrCard(idPlayer, cardsCount) {
     const numbCardsCenterDeck = deckCenter.children.length;
     
     if(idPlayer != 0) {
         const deckWinner = document.querySelector(`#deck-${idPlayer}`);
         const numbCards = deckWinner.childElementCount;
 
-        for(let i = numbCards + 1; i < cardsCount + numbCards + numbCardsCenterDeck +   1; i++) {
+        for(let i = numbCards + 1; i < cardsCount + numbCards + numbCardsCenterDeck + 1; i++) {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');
             card.setAttribute('id', `deck-${idPlayer}-card-${i}`);
@@ -189,6 +228,6 @@ function distrCard(idPlayer, cardsCount) {
             deckCenter.appendChild(card);
         }
     }
-    infoCards(numbPlayers);
+    infoCards();
 };
 
