@@ -52,7 +52,7 @@ function infoCards() {
         if(decks[i] != undefined) {
             infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;
             if(decks[i].childElementCount === 0) {
-                closeSelecCards();
+                cardsSelec[i].style.display = 'none';
                 numbPlayers -= 1;
                 delete decks[i];
                 delete cardsSelec[i];
