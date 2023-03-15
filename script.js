@@ -16,7 +16,7 @@ const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
 let maxCount = 0;
 let idWinners = [];
-let idGameOverPl = 0;
+let idGameOverPl = [];
 
 
 mainPlayBtn.addEventListener('click', openSelecCards);
@@ -64,8 +64,9 @@ function infoCards() {
                 delete decks[i];
                 delete cardsSelec[i];
                 delete atribPlayers[i];
-                idGameOverPl = i+1;
-
+                idGameOverPl.push(i+1);
+                maxCount = 0;
+                idWinners = [];
             }      
         }
     }
@@ -73,7 +74,7 @@ function infoCards() {
 
 
 function openSelecCards() {
-    idGameOverPl = 0;
+    idGameOverPl = [];
     secSelecCards.style.display = 'block';
 };
 
@@ -81,8 +82,10 @@ function closeSelecCards() {
     secSelecCards.style.display = 'none';  
     showAdvCards("off");
     disableBtn(atribButtons1.length);
-    if(idGameOverPl != 0) {
-        document.querySelector(`#player-${idGameOverPl}`).style.display = 'none';
+    if(idGameOverPl.length > 0) {
+        for(id of idGameOverPl) {
+            document.querySelector(`#player-${id}`).style.display = 'none';
+        }
         titleGameOver(idGameOverPl);
         openCloseGameOver();
     }
@@ -197,11 +200,11 @@ function compareValues(id) {
     console.log(numberRoundCards(values));
 
     if(maxCount === 1) {
-        distrCard(idWinners, numberRoundCards(values));
         textResult.querySelector('p').innerText = `O jogador ${idWinners} foi o vencedor`;
+        distrCard(idWinners, numberRoundCards(values));
     } else {
-        distrCard(0, numberRoundCards(values));
         textResult.querySelector('p').innerText = `Os jogadores ${idWinners.join(', ')} empataram`;
+        distrCard(0, numberRoundCards(values));
     }
     textResult.style.display = 'flex';
 };
@@ -255,5 +258,9 @@ function openCloseGameOver() {
 };
 
 function titleGameOver(idGO) {
-    textGameOver.querySelector('p').innerText = `O jogador ${idGO} perdeu`;
+    if(idGO.length > 1) {
+        textGameOver.querySelector('p').innerText = `Os jogadores ${idGO.join(', ')} perderam`;
+    } else {
+        textGameOver.querySelector('p').innerText = `O jogador ${idGO} perdeu`;
+    }
 };
