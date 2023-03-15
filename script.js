@@ -3,6 +3,7 @@ let numbTotalCards = 12;
 let numbCardInit = 3; 
 const mainPlayBtn = document.querySelector('#main-play-btn');
 const secSelecCards = document.querySelector('.selected-cards');
+const secGameOver = document.querySelector('#gameover-sec'); 
 const decks = [];
 const deckCenter = document.querySelector('#center-deck');
 const infoPlayers = [];
@@ -10,10 +11,17 @@ const cardsSelec = [];
 const atribButtons1 = document.querySelector('#player-1').getElementsByClassName('button-card');
 const atribPlayers = [];
 const textResult = document.querySelector('#text-result');
+const textGameOver = document.querySelector('#title-gameover');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
+const btnGameOver = document.querySelector('#btn-ok-gameover');
 let maxCount = 0;
 let idWinners = [];
+let idGameOverPl = 0;
 
+
+mainPlayBtn.addEventListener('click', openSelecCards);
+btnSelecCards.addEventListener('click', closeSelecCards);
+btnGameOver.addEventListener('click', openCloseGameOver);
 
 countPlayers(numbPlayers);
 
@@ -57,16 +65,16 @@ function infoCards() {
                 delete decks[i];
                 delete cardsSelec[i];
                 delete atribPlayers[i];
+                idGameOverPl = i+1;
+
             }      
         }
     }
 };
 
-mainPlayBtn.addEventListener('click', openSelecCards);
-
-btnSelecCards.addEventListener('click', closeSelecCards);
 
 function openSelecCards() {
+    idGameOverPl = 0;
     secSelecCards.style.display = 'block';
 };
 
@@ -74,6 +82,10 @@ function closeSelecCards() {
     secSelecCards.style.display = 'none';  
     showAdvCards("off");
     disableBtn(atribButtons1.length);
+    if(idGameOverPl != 0) {
+        titleGameOver(idGameOverPl);
+        openCloseGameOver();
+    }
 };
 
 for(let i = 0; i < atribButtons1.length; i++) {
@@ -231,3 +243,17 @@ function distrCard(idPlayer, cardsCount) {
     infoCards();
 };
 
+function openCloseGameOver() {
+    const auxSecGameOver = getComputedStyle(secGameOver).display;
+
+
+    if(auxSecGameOver === 'none' || secGameOver.style.display === 'none') {
+        secGameOver.style.display = 'block';
+    } else if (auxSecGameOver === 'block' || secGameOver.style.display === 'block') {
+        secGameOver.style.display = 'none';
+    }
+};
+
+function titleGameOver(idGO) {
+    textGameOver.querySelector('p').innerText = `O jogador ${idGO} perdeu`;
+};
