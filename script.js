@@ -60,7 +60,6 @@ function infoCards() {
         if(decks[i] != undefined) {
             infoPlayers[i].querySelector('.info-cards').textContent = `${decks[i].childElementCount} cartas`;
             if(decks[i].childElementCount === 0) {
-                cardsSelec[i].style.display = 'none';
                 numbPlayers -= 1;
                 delete decks[i];
                 delete cardsSelec[i];
@@ -83,6 +82,7 @@ function closeSelecCards() {
     showAdvCards("off");
     disableBtn(atribButtons1.length);
     if(idGameOverPl != 0) {
+        document.querySelector(`#player-${idGameOverPl}`).style.display = 'none';
         titleGameOver(idGameOverPl);
         openCloseGameOver();
     }
