@@ -1,5 +1,3 @@
-. Verificar quando dois jogadores perdem na mesma rodada.
-. Criar condição de Jogador Vencedor.
 . Fazer o computador escolher um atributo quando o player 1 perder a rodada. 
 . Mudar de class para id em section class="selected-cards" no HTML.
 . Revisar 'while' em distrCard.

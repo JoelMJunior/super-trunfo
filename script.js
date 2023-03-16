@@ -74,8 +74,10 @@ function infoCards() {
 
 
 function openSelecCards() {
-    idGameOverPl = [];
-    secSelecCards.style.display = 'block';
+    if(numbPlayers > 1) {
+        idGameOverPl = [];
+        secSelecCards.style.display = 'block';
+    }
 };
 
 function closeSelecCards() {
@@ -197,8 +199,6 @@ function compareValues(id) {
         }
     };
 
-    console.log(numberRoundCards(values));
-
     if(maxCount === 1) {
         textResult.querySelector('p').innerText = `O jogador ${idWinners} foi o vencedor`;
         distrCard(idWinners, numberRoundCards(values));
@@ -249,18 +249,24 @@ function distrCard(idPlayer, cardsCount) {
 function openCloseGameOver() {
     const auxSecGameOver = getComputedStyle(secGameOver).display;
 
-
     if(auxSecGameOver === 'none' || secGameOver.style.display === 'none') {
         secGameOver.style.display = 'block';
-    } else if (auxSecGameOver === 'block' || secGameOver.style.display === 'block') {
+    } else if(auxSecGameOver === 'block' || secGameOver.style.display === 'block') {
         secGameOver.style.display = 'none';
     }
 };
 
 function titleGameOver(idGO) {
-    if(idGO.length > 1) {
-        textGameOver.querySelector('p').innerText = `Os jogadores ${idGO.join(', ')} perderam`;
-    } else {
-        textGameOver.querySelector('p').innerText = `O jogador ${idGO} perdeu`;
+    if(numbPlayers > 1) {
+        if(idGO.length > 1) {
+            textGameOver.querySelector('p').innerText = `Os jogadores ${idGO.join(', ')} perderam`;
+        } else if(idGO.length === 1) {
+            textGameOver.querySelector('p').innerText = `O jogador ${idGO} perdeu`;
+        }
+    } else if(numbPlayers === 1) {
+        const indWin = decks.findIndex((indW) => { return indW != undefined });
+        textGameOver.querySelector('p').innerText = `O jogador ${indWin+1} ganhou o jogo`;
+    } else if(numbPlayers === 0) {
+        textGameOver.querySelector('p').innerText = `Os jogadores ${idGO.join(', ')} empataram o jogo`;
     }
 };
