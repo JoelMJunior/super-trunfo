@@ -16,6 +16,7 @@ const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
 let maxCount = 0;
 let idWinners = [];
+let oldWinner = 1;
 let idGameOverPl = [];
 
 
@@ -65,18 +66,26 @@ function infoCards() {
                 delete cardsSelec[i];
                 delete atribPlayers[i];
                 idGameOverPl.push(i+1);
-                maxCount = 0;
-                idWinners = [];
             }      
         }
     }
 };
 
-
 function openSelecCards() {
     if(numbPlayers > 1) {
         idGameOverPl = [];
-        secSelecCards.style.display = 'block';
+        if(idWinners.length === 0 || oldWinner === 1) {
+            maxCount = 0;
+            idWinners = [];
+            secSelecCards.style.display = 'block';
+            cardsSelec[0].style.display = 'flex';
+        } else if(maxCount === 1) {
+            secSelecCards.style.display = 'block';
+            choseAtrib(idWinners);
+        } else if(maxCount > 1) {
+            secSelecCards.style.display = 'block';
+            choseAtrib(idWinners);
+        }
     }
 };
 
@@ -103,6 +112,15 @@ for(let i = 0; i < atribButtons1.length; i++) {
     
 };
 
+function choseAtrib(idPlayer) {
+    const auxAtrib = Math.floor(Math.random() * 5);
+    console.log(auxAtrib);
+    showAdvCards("on");
+    disableBtn(auxAtrib);
+    takeCards();
+    compareValues(auxAtrib);
+};
+
 function showAdvCards(turn) {
     if(turn === "on") {
         for(cs of cardsSelec) {
@@ -121,7 +139,7 @@ function showAdvCards(turn) {
         btnSelecCards.style.display = 'flex';
     } else {
         for(cs of cardsSelec) {
-            if(cs != undefined && cs != cardsSelec[0]) {
+            if(cs != undefined) {
                 cs.style.display = 'none';
             }
         }
@@ -199,6 +217,8 @@ function compareValues(id) {
         }
     };
 
+    LastWinner(idWinners);
+
     if(maxCount === 1) {
         textResult.querySelector('p').innerText = `O jogador ${idWinners} foi o vencedor`;
         distrCard(idWinners, numberRoundCards(values));
@@ -207,6 +227,17 @@ function compareValues(id) {
         distrCard(0, numberRoundCards(values));
     }
     textResult.style.display = 'flex';
+};
+
+function LastWinner(winners) {
+    if(winners.includes(oldWinner)) {
+        oldWinner = oldWinner; 
+    } else {
+        const indOW = Math.floor(Math.random() * winners.length);
+        oldWinner = winners[indOW];
+        console.log(indOW);
+        console.log(oldWinner);
+    }
 };
 
 function numberRoundCards(vals) {

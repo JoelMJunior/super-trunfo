@@ -1,6 +1,9 @@
-. Fazer o computador escolher um atributo quando o player 1 perder a rodada. 
-. Mudar de class para id em section class="selected-cards" no HTML.
-. Revisar 'while' em distrCard.
+. Fazer o computador escolher um atributo quando o player 1 perder a rodada.
+. Corrigir a tela de GameOver que está repetindo.
+. Acabar o jogo quando o jogador 1 perder.
+. Criar botão de resetar. 
 . Alterar os atributos e nomes das cartas de acordo com seu id.
 . Fazer o código funcionar com número de jogadores variável.
+. Mudar de class para id em section class="selected-cards" no HTML.
+. Revisar 'while' em distrCard.
 . Pesquisar sobre ':root' no CSS.
