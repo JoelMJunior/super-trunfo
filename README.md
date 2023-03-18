@@ -1,5 +1,3 @@
-. Fazer o computador escolher um atributo quando o player 1 perder a rodada.
-. Corrigir a tela de GameOver que está repetindo.
 . Acabar o jogo quando o jogador 1 perder.
 . Criar botão de resetar. 
 . Alterar os atributos e nomes das cartas de acordo com seu id.
