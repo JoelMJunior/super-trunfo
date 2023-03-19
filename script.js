@@ -14,6 +14,7 @@ const textResult = document.querySelector('#text-result');
 const textGameOver = document.querySelector('#title-gameover');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
+const btnResetGOver = document.querySelector('#btn-reset-gameover');
 let maxCount = 0;
 let idWinners = [];
 let oldWinner = 1;
@@ -23,6 +24,7 @@ let idGameOverPl = [];
 mainPlayBtn.addEventListener('click', openSelecCards);
 btnSelecCards.addEventListener('click', closeSelecCards);
 btnGameOver.addEventListener('click', openCloseGameOver);
+btnResetGOver.addEventListener('click', resetGame);
 
 countPlayers(numbPlayers);
 
@@ -281,6 +283,10 @@ function openCloseGameOver() {
     const auxSecGameOver = getComputedStyle(secGameOver).display;
 
     if(auxSecGameOver === 'none' || secGameOver.style.display === 'none') {
+        if(decks[0] === undefined) {
+            btnResetGOver.style.display = 'block';
+            console.log('entrou');
+        }
         secGameOver.style.display = 'block';
     } else if(auxSecGameOver === 'block' || secGameOver.style.display === 'block') {
         secGameOver.style.display = 'none';
@@ -300,4 +306,8 @@ function titleGameOver(idGO) {
     } else if(numbPlayers === 0) {
         textGameOver.querySelector('p').innerText = `Os jogadores ${idGO.join(', ')} empataram o jogo`;
     }
+};
+
+function resetGame() {
+    document.location.reload(true);
 };

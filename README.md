@@ -1,5 +1,4 @@
 . Acabar o jogo quando o jogador 1 perder.
-. Criar botão de resetar. 
 . Alterar os atributos e nomes das cartas de acordo com seu id.
 . Fazer o código funcionar com número de jogadores variável.
 . Mudar de class para id em section class="selected-cards" no HTML.
