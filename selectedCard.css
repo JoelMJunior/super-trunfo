@@ -5,21 +5,37 @@
     height: 100vh;
     top: 0;
     left: 0;
-    display: none;
+    display: block;
 }
 
 .selected-container {
-    margin: 40px 0;
+    margin: 35px 0;
 }
-
-#player-2, #player-3, #player-4 {
-    display: none;
-} 
 
 .only-cards {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+}
+
+.selec-cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#card-pl-2, #card-pl-3, #card-pl-4 {
+    display: none;
+} 
+
+.tag-selec-card {
+    width: fit-content;
+    padding: 5px;
+    background-color: darkred;
+    color: white;
+    font-size: 1.2em;
+    border-radius: 3px;
+    margin-bottom: 1em;
 }
 
 .form-card {
@@ -121,14 +137,14 @@
     font-size: 1.5em;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
     color: white;
-    margin-top: 25px;
+    margin-top: 0.75em;
 }
 
 #btn-selected-cards {
     display: none;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 0.75em;
 }
 
 #btn-selected-cards button {

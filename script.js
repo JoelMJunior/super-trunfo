@@ -33,7 +33,7 @@ function countPlayers(nPlayers) {
         decks.push(document.querySelector(`#deck-${i}`));
         infoPlayers.push(document.querySelector(`#info-pl-${i}`));
         infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
-        cardsSelec.push(document.querySelector(`#player-${i}`));
+        cardsSelec.push(document.querySelector(`#card-pl-${i}`));
         atribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.atributes-card'));
     }
     addCard();
@@ -97,7 +97,7 @@ function closeSelecCards() {
     disableBtn(atribButtons1.length);
     if(idGameOverPl.length > 0) {
         for(id of idGameOverPl) {
-            document.querySelector(`#player-${id}`).style.display = 'none';
+            document.querySelector(`#card-pl-${id}`).style.display = 'none';
         }
         titleGameOver(idGameOverPl);
         openCloseGameOver();
