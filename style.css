@@ -52,6 +52,17 @@
     background-color: red;
 }
 
+.name-player {
+    min-width: 70px;
+    text-align: center;
+    width: fit-content;
+    position: absolute;
+    padding: 5px;
+    color: white;
+    background-color: darkred;
+    border-radius: 5px;
+}
+
 .player-container {
     display: flex;
     position: absolute;
@@ -69,14 +80,26 @@
 #pc-1 {
     bottom: 0;
 }
+#pc-1 .name-player {
+    right: 105%;
+}
 #pc-2 {
     right: 0;
+}
+#pc-2 .name-player {
+    bottom: 105%;
 }
 #pc-3 {
     top: 0;
 }
+#pc-3 .name-player {
+    left: 105%;
+}
 #pc-4 {
     left: 0;
+}
+#pc-4 .name-player {
+    top: 105%;
 }
 
 .decks {
