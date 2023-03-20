@@ -1,5 +1,6 @@
 :root {
     --size-height-card: 130px;
+    --distance-name-player: 105%;
 }
 
 * {
@@ -81,25 +82,25 @@
     bottom: 0;
 }
 #pc-1 .name-player {
-    right: 105%;
+    right: var(--distance-name-player);
 }
 #pc-2 {
     right: 0;
 }
 #pc-2 .name-player {
-    bottom: 105%;
+    bottom: var(--distance-name-player);
 }
 #pc-3 {
     top: 0;
 }
 #pc-3 .name-player {
-    left: 105%;
+    left: var(--distance-name-player);
 }
 #pc-4 {
     left: 0;
 }
 #pc-4 .name-player {
-    top: 105%;
+    top: var(--distance-name-player);
 }
 
 .decks {
@@ -127,14 +128,14 @@
     border: 1px solid black;
     background-color: green;
 }
-.card:last-child {
+.card:last-child, #center-deck .card:last-child {
     flex-shrink: 0;
 }
 
-.decks:hover .card:last-child{
+.decks:hover .card:last-child, #center-deck:hover .card:last-child {
     flex-shrink: 1;
 } 
-#cards-container .card:hover {
+#cards-container .card:hover, #cards-container #center-deck .card:hover {
     flex-shrink: 0;
 }
 
@@ -153,11 +154,12 @@
     width: 250px;
     height: 80px;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
-    margin-bottom: 10px;
+    margin-top: 15px;
     margin-left: 20px;
     background-color: greenyellow;
+    border: 2px solid darkgreen;
     border-radius: 3px;
 }
 

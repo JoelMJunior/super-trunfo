@@ -1,3 +1,4 @@
+. Simplicar no CSS style.css o comandos para o #deck-center.
 . Alterar os atributos e nomes das cartas de acordo com seu id.
 . Fazer o código funcionar com número de jogadores variável.
 . Mudar de class para id em section class="selected-cards" no HTML.
