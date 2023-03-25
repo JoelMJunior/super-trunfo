@@ -287,7 +287,7 @@ function openCloseGameOver() {
     const auxSecGameOver = getComputedStyle(secGameOver).display;
 
     if(auxSecGameOver === 'none' || secGameOver.style.display === 'none') {
-        if(decks[0] === undefined) {
+        if(decks[0] === undefined || numbPlayers === 1) {
             btnResetGOver.style.display = 'block';
         }
         secGameOver.style.display = 'block';
