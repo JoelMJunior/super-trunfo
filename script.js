@@ -68,6 +68,9 @@ function infoCards() {
                 delete cardsSelec[i];
                 delete atribPlayers[i];
                 idGameOverPl.push(i+1);
+                if(idWinners.includes(i+1)) {
+                    idWinners.splice(idWinners.indexOf(i+1), 1);
+                }
             }      
         }
     }
@@ -76,15 +79,11 @@ function infoCards() {
 function openSelecCards() {
     if(numbPlayers > 1) {
         idGameOverPl = [];
-        if(idWinners.length === 0 || oldWinner === 1) {
-            secSelecCards.style.display = 'block';
+        secSelecCards.style.display = 'block';
+        if(oldWinner === 1) {
             cardsSelec[0].style.display = 'flex';
-        } else if(maxCount === 1) {
-            secSelecCards.style.display = 'block';
-            choseAtrib(idWinners);
-        } else if(maxCount > 1) {
-            secSelecCards.style.display = 'block';
-            choseAtrib(idWinners);
+        } else {
+            choseAtrib();
         }
     }
 };
@@ -112,7 +111,7 @@ for(let i = 0; i < atribButtons1.length; i++) {
     
 };
 
-function choseAtrib(idPlayer) {
+function choseAtrib() {
     const auxAtrib = Math.floor(Math.random() * 5);
     showAdvCards("on");
     disableBtn(auxAtrib);
@@ -215,7 +214,6 @@ function compareValues(id) {
         }
     };
 
-    
     if(maxCount === 1) {
         textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${id+1}.<br> O jogador ${idWinners} foi o vencedor.`;
         distrCard(idWinners, numberRoundCards(values));
@@ -228,11 +226,23 @@ function compareValues(id) {
 };
 
 function LastWinner(winners) {
-    if(winners.includes(oldWinner)) {
-        oldWinner = oldWinner; 
+    if(winners.length != 0) {
+        if(winners.includes(oldWinner)) {
+            oldWinner = oldWinner; 
+        } else {
+            const indOW = Math.floor(Math.random() * winners.length);
+            oldWinner = winners[indOW];
+        }
     } else {
-        const indOW = Math.floor(Math.random() * winners.length);
-        oldWinner = winners[indOW];
+        let auxIdPlayers = [];
+        for(d of decks) {
+            if(d != undefined) {
+                auxIdPlayers.push(decks.indexOf(d)+1);
+            }
+        }
+        const indOW = Math.floor(Math.random() * auxIdPlayers.length);
+        oldWinner = auxIdPlayers[indOW];
+        maxCount = 0;
     }
 };
 
