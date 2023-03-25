@@ -114,7 +114,6 @@ for(let i = 0; i < atribButtons1.length; i++) {
 
 function choseAtrib(idPlayer) {
     const auxAtrib = Math.floor(Math.random() * 5);
-    console.log(auxAtrib);
     showAdvCards("on");
     disableBtn(auxAtrib);
     takeCards();
@@ -201,7 +200,6 @@ function compareValues(id) {
             values.push(-Infinity);
         }
     };
-    console.log(values);
     
     const maxValue = values.reduce(function(a, b) {
         return Math.max(a, b);
@@ -217,15 +215,15 @@ function compareValues(id) {
         }
     };
 
-    LastWinner(idWinners);
-
+    
     if(maxCount === 1) {
-        textResult.querySelector('p').innerText = `O jogador ${idWinners} foi o vencedor`;
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${id+1}.<br> O jogador ${idWinners} foi o vencedor.`;
         distrCard(idWinners, numberRoundCards(values));
     } else {
-        textResult.querySelector('p').innerText = `Os jogadores ${idWinners.join(', ')} empataram`;
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${id+1}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
         distrCard(0, numberRoundCards(values));
     }
+    LastWinner(idWinners);
     textResult.style.display = 'flex';
 };
 
@@ -235,8 +233,6 @@ function LastWinner(winners) {
     } else {
         const indOW = Math.floor(Math.random() * winners.length);
         oldWinner = winners[indOW];
-        console.log(indOW);
-        console.log(oldWinner);
     }
 };
 
@@ -283,7 +279,6 @@ function openCloseGameOver() {
     if(auxSecGameOver === 'none' || secGameOver.style.display === 'none') {
         if(decks[0] === undefined) {
             btnResetGOver.style.display = 'block';
-            console.log('entrou');
         }
         secGameOver.style.display = 'block';
     } else if(auxSecGameOver === 'block' || secGameOver.style.display === 'block') {
