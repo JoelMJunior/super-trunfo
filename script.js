@@ -77,8 +77,6 @@ function openSelecCards() {
     if(numbPlayers > 1) {
         idGameOverPl = [];
         if(idWinners.length === 0 || oldWinner === 1) {
-            maxCount = 0;
-            idWinners = [];
             secSelecCards.style.display = 'block';
             cardsSelec[0].style.display = 'flex';
         } else if(maxCount === 1) {
