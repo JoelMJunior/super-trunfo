@@ -25,11 +25,10 @@ let idGameOverPl = [];
 
 
 async function getInfoPokemon() {
-    for(let i=1; i <= 151; i++) {
-        pokemonList.push(await getPokemon(i));
-    }
+    pokemonList = await getPokemon();
 };
 await getInfoPokemon();
+console.log(pokemonList);
 
 mainPlayBtn.addEventListener('click', openSelecCards);
 btnSelecCards.addEventListener('click', closeSelecCards);
@@ -103,7 +102,7 @@ function closeSelecCards() {
     showAdvCards("off");
     disableBtn(atribButtons1.length);
     if(idGameOverPl.length > 0) {
-        for(id of idGameOverPl) {
+        for(let id of idGameOverPl) {
             document.querySelector(`#card-pl-${id}`).style.display = 'none';
         }
         titleGameOver(idGameOverPl);
@@ -131,7 +130,7 @@ function choseAtrib() {
 
 function showAdvCards(turn) {
     if(turn === "on") {
-        for(cs of cardsSelec) {
+        for(let cs of cardsSelec) {
             if(cs != undefined) {
                 if(maxCount > 1) {
                     idWinners.forEach((ids) => {
@@ -146,7 +145,7 @@ function showAdvCards(turn) {
         }
         btnSelecCards.style.display = 'flex';
     } else {
-        for(cs of cardsSelec) {
+        for(let cs of cardsSelec) {
             if(cs != undefined) {
                 cs.style.display = 'none';
             }
@@ -160,7 +159,7 @@ function disableBtn(id) {
     const allAtribBtns = document.getElementsByClassName('button-card');
     
     if(id < atribButtons1.length) {
-        for(ap of atribPlayers) {
+        for(let ap of atribPlayers) {
             if(ap != undefined) {
                 ap.children[id].classList.add('chosen');
             }
@@ -177,7 +176,7 @@ function disableBtn(id) {
 };
 
 function takeCards() {
-    for(d of decks) {
+    for(let d of decks) {
         if(d != undefined) {
             if(maxCount > 1) {
                 idWinners.forEach((ids) => {
@@ -194,7 +193,7 @@ function takeCards() {
 
 function compareValues(id) {
     let values = [];
-    for(ap of atribPlayers) {
+    for(let ap of atribPlayers) {
         if(ap != undefined) {
             if(maxCount > 1) {
                 if(idWinners.includes(atribPlayers.indexOf(ap)+1)) {
@@ -245,7 +244,7 @@ function LastWinner(winners) {
         }
     } else {
         let auxIdPlayers = [];
-        for(d of decks) {
+        for(let d of decks) {
             if(d != undefined) {
                 auxIdPlayers.push(decks.indexOf(d)+1);
             }
@@ -257,7 +256,7 @@ function LastWinner(winners) {
 };
 
 function numberRoundCards(vals) {
-    nrCards = 0;
+    let nrCards = 0;
     vals.forEach((value) => {
         if(value != -Infinity) {
             nrCards++;
