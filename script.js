@@ -1,6 +1,9 @@
+import { getPokemon } from './servicePokemonApi.js';
+
 let numbPlayers = 4;
 let numbTotalCards = 12;
-let numbCardInit = 3; 
+let numbCardInit = 3;
+let pokemonList = []; 
 const mainPlayBtn = document.querySelector('#main-play-btn');
 const secSelecCards = document.querySelector('.selected-cards');
 const secGameOver = document.querySelector('#gameover-sec'); 
@@ -20,6 +23,13 @@ let idWinners = [];
 let oldWinner = 1;
 let idGameOverPl = [];
 
+
+async function getInfoPokemon() {
+    for(let i=1; i <= 151; i++) {
+        pokemonList.push(await getPokemon(i));
+    }
+};
+await getInfoPokemon();
 
 mainPlayBtn.addEventListener('click', openSelecCards);
 btnSelecCards.addEventListener('click', closeSelecCards);
