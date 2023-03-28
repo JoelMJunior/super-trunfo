@@ -4,8 +4,8 @@ let numbPlayers = 4;
 let numbTotalCards = 12;
 let numbCardInit = 3;
 let pokemonList = []; 
-let listPl1=[], listPl2=[], listPl3=[], listPl4=[];
-let allListPl=[listPl1, listPl2, listPl3, listPl4];
+let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
+let allListPl=[listPl1, listPl2, listPl3, listPl4, listDraw];
 const mainPlayBtn = document.querySelector('#main-play-btn');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
@@ -91,7 +91,7 @@ function infoCards() {
 function raffleIds() {
     const exemp = [];
     for(let i = 0; i < numbTotalCards; i++) {
-        exemp[i] = i+1;
+        exemp[i] = i;
     }
 
     let p, n, tmp;
@@ -115,14 +115,16 @@ function raffleIds() {
 
 function defineAttribs() {
     for(let i=0; i < cardsSelec.length; i++) {
-        cardsSelec[i].querySelector('.number-card').querySelector('p').innerText = `#${pokemonList[allListPl[i][0]].id}`;
-        cardsSelec[i].querySelector('.name-card').querySelector('p').innerText = pokemonList[allListPl[i][0]].name;
-        cardsSelec[i].querySelector('.image-card').querySelector('img').setAttribute('src', pokemonList[allListPl[i][0]].image);
-        atribPlayers[i].children[0].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[0];
-        atribPlayers[i].children[1].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[1];
-        atribPlayers[i].children[2].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[2];
-        atribPlayers[i].children[3].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[3];
-        atribPlayers[i].children[4].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[4];
+        if(decks[i] != undefined) {
+            cardsSelec[i].querySelector('.number-card').querySelector('p').innerText = `#${pokemonList[allListPl[i][0]].id}`;
+            cardsSelec[i].querySelector('.name-card').querySelector('p').innerText = pokemonList[allListPl[i][0]].name;
+            cardsSelec[i].querySelector('.image-card').querySelector('img').setAttribute('src', pokemonList[allListPl[i][0]].image);
+            atribPlayers[i].children[0].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[0];
+            atribPlayers[i].children[1].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[1];
+            atribPlayers[i].children[2].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[2];
+            atribPlayers[i].children[3].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[3];
+            atribPlayers[i].children[4].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[4];
+        }
     }
 }
 
@@ -149,6 +151,7 @@ function closeSelecCards() {
         titleGameOver(idGameOverPl);
         openCloseGameOver();
     }
+    defineAttribs();
 };
 
 for(let i = 0; i < atribButtons1.length; i++) {
@@ -222,13 +225,17 @@ function takeCards() {
                 idWinners.forEach((ids) => {
                     if(decks.indexOf(d) === ids-1) {
                         d.removeChild(d.lastChild);
+                        listDraw.push(allListPl[decks.indexOf(d)].shift());
                     }
                 });
             } else {
                 d.removeChild(d.lastChild);
+                listDraw.push(allListPl[decks.indexOf(d)].shift());
             }
         }
     }
+    console.log(listDraw);
+    console.log(allListPl);
 };
 
 function compareValues(id) {
@@ -319,7 +326,12 @@ function distrCard(idPlayer, cardsCount) {
     if(idPlayer != 0) {
         const deckWinner = document.querySelector(`#deck-${idPlayer}`);
         const numbCards = deckWinner.childElementCount;
-
+        
+        let numbLD = listDraw.length; 
+        for(let i=0; i< numbLD; i++) {
+            allListPl[idPlayer-1].push(listDraw.shift()); 
+        }
+        console.log(allListPl);
         for(let i = numbCards + 1; i < cardsCount + numbCards + numbCardsCenterDeck + 1; i++) {
             const card = document.createElement('div');
             card.setAttribute('class', 'card');

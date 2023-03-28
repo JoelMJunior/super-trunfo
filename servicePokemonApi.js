@@ -20,7 +20,6 @@ async function getPokemon() {
         attribs.push(weight);
         return { id, name, image, attribs };
     });
-    console.log(pokemonList);
     return pokemonListMapped;
 }
 
