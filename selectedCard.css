@@ -81,13 +81,24 @@
 }
 
 .name-card p {
+    text-transform: capitalize;
     font-size: 1.5em;
 }
 
 .image-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 90%;
     height: 40%;
     background-color: rgb(139, 2, 2);
+}
+
+.image-card img {
+    width: 130px;
+    padding: 8px;
+    background-color: rgba(230, 215, 5, 0.733);
+    border-radius: 50% 50%;
 }
 
 .atributes-card {
