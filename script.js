@@ -282,10 +282,11 @@ function compareValues(id) {
 };
 
 function defineTextResult(mc, atb) {
+    const atribText = document.querySelector(`#player-1`).querySelector('.atributes-card').children[atb].querySelector('.atrib-text').textContent;
     if(mc === 1) {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribPlayers[0].children[atb].querySelector('.atrib-text').textContent}.<br> O jogador ${idWinners} foi o vencedor.`;
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribText}.<br> O jogador ${idWinners} foi o vencedor.`;
     } else {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribPlayers[0].children[atb].querySelector('.atrib-text').textContent}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribText}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
     }
 };
 
