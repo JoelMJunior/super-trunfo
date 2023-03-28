@@ -110,12 +110,12 @@ function raffleIds() {
             indexDeck++;
         }
     }
-    console.log(exemp);
     console.log(allListPl);
 };
 
 function defineAttribs() {
     for(let i=0; i < cardsSelec.length; i++) {
+        cardsSelec[i].querySelector('.number-card').querySelector('p').innerText = `#${pokemonList[allListPl[i][0]].id}`;
         cardsSelec[i].querySelector('.name-card').querySelector('p').innerText = pokemonList[allListPl[i][0]].name;
         cardsSelec[i].querySelector('.image-card').querySelector('img').setAttribute('src', pokemonList[allListPl[i][0]].image);
         atribPlayers[i].children[0].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[0];
