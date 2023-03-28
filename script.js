@@ -4,7 +4,12 @@ let numbPlayers = 4;
 let numbTotalCards = 12;
 let numbCardInit = 3;
 let pokemonList = []; 
+let listPl1=[], listPl2=[], listPl3=[], listPl4=[];
+let allListPl=[listPl1, listPl2, listPl3, listPl4];
 const mainPlayBtn = document.querySelector('#main-play-btn');
+const btnSelecCards = document.querySelector('#btn-selected-cards');
+const btnGameOver = document.querySelector('#btn-ok-gameover');
+const btnResetGOver = document.querySelector('#btn-reset-gameover');
 const secSelecCards = document.querySelector('.selected-cards');
 const secGameOver = document.querySelector('#gameover-sec'); 
 const decks = [];
@@ -15,9 +20,6 @@ const atribButtons1 = document.querySelector('#player-1').getElementsByClassName
 const atribPlayers = [];
 const textResult = document.querySelector('#text-result');
 const textGameOver = document.querySelector('#title-gameover');
-const btnSelecCards = document.querySelector('#btn-selected-cards');
-const btnGameOver = document.querySelector('#btn-ok-gameover');
-const btnResetGOver = document.querySelector('#btn-reset-gameover');
 let maxCount = 0;
 let idWinners = [];
 let oldWinner = 1;
@@ -36,7 +38,6 @@ btnGameOver.addEventListener('click', openCloseGameOver);
 btnResetGOver.addEventListener('click', resetGame);
 
 countPlayers(numbPlayers);
-
 function countPlayers(nPlayers) {
     for(let i = 1; i < nPlayers + 1; i++){
         decks.push(document.querySelector(`#deck-${i}`));
@@ -47,6 +48,8 @@ function countPlayers(nPlayers) {
     }
     addCard();
     infoCards();
+    raffleIds();
+    defineAttribs();
 };
 
 function addCard() {
@@ -85,6 +88,44 @@ function infoCards() {
     }
 };
 
+function raffleIds() {
+    const exemp = [];
+    for(let i = 0; i < numbTotalCards; i++) {
+        exemp[i] = i+1;
+    }
+
+    let p, n, tmp;
+    for(p = exemp.length; p;) {
+        n = Math.random() * p-- | 0;
+        tmp = exemp[n];
+        exemp[n] = exemp[p];
+        exemp[p] = tmp;
+    }
+
+    let indexDeck = 0;
+    for(let i = 0; i < exemp.length; i++) {
+        allListPl[indexDeck].push(exemp[i]);
+
+        if(i === ((indexDeck+1)*exemp.length/numbPlayers)-1) {
+            indexDeck++;
+        }
+    }
+    console.log(exemp);
+    console.log(allListPl);
+};
+
+function defineAttribs() {
+    for(let i=0; i < cardsSelec.length; i++) {
+        cardsSelec[i].querySelector('.name-card').querySelector('p').innerText = pokemonList[allListPl[i][0]].name;
+        cardsSelec[i].querySelector('.image-card').querySelector('img').setAttribute('src', pokemonList[allListPl[i][0]].image);
+        atribPlayers[i].children[0].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[0];
+        atribPlayers[i].children[1].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[1];
+        atribPlayers[i].children[2].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[2];
+        atribPlayers[i].children[3].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[3];
+        atribPlayers[i].children[4].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[4];
+    }
+}
+
 function openSelecCards() {
     if(numbPlayers > 1) {
         idGameOverPl = [];
@@ -117,7 +158,6 @@ for(let i = 0; i < atribButtons1.length; i++) {
         takeCards();
         compareValues(i);
     });
-    
 };
 
 function choseAtrib() {
@@ -224,17 +264,25 @@ function compareValues(id) {
     };
 
     if(maxCount === 1) {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${id+1}.<br> O jogador ${idWinners} foi o vencedor.`;
+        defineTextResult(maxCount, id);
         distrCard(idWinners, numberRoundCards(values));
     } else {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${id+1}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
+        defineTextResult(maxCount, id);
         distrCard(0, numberRoundCards(values));
     }
-    LastWinner(idWinners);
+    lastWinner(idWinners);
     textResult.style.display = 'flex';
 };
 
-function LastWinner(winners) {
+function defineTextResult(mc, atb) {
+    if(mc === 1) {
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribPlayers[0].children[atb].querySelector('.atrib-text').textContent}.<br> O jogador ${idWinners} foi o vencedor.`;
+    } else {
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribPlayers[0].children[atb].querySelector('.atrib-text').textContent}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
+    }
+};
+
+function lastWinner(winners) {
     if(winners.length != 0) {
         if(winners.includes(oldWinner)) {
             oldWinner = oldWinner; 

@@ -1,4 +1,5 @@
-- CONTINUAR AQUI: Alterar os atributos e nomes das cartas de acordo com seu id.
+- Definir o código das cartas (1A) ou #ID.
+- Fazer girar a lista dos id das cartas de acordo com o resultado da jogada.
 - Fazer o código funcionar com número de jogadores variável.
 
 - Mudar a cor da label na main box quando o jogador perder todas as cartas.
