@@ -1,5 +1,7 @@
 - Fazer o código funcionar com número de jogadores variável.
+- Criar uma tela inicial que envolve o loading.
 
+- Ajustar responsividade.
 - Mudar a cor do fundo da imagem de acordo com o tipo do pokemon.
 - Mudar a cor da label na main box quando o jogador perder todas as cartas.
 - Colocar favicon.
