@@ -1,3 +1,5 @@
+CONTINUAR NO RESPONSIVENESS.CSS
+
 - Fazer o código funcionar com número de jogadores variável.
 - Criar uma tela inicial que envolve o loading.
 

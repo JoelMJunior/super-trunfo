@@ -1,0 +1,38 @@
+@media only screen and (max-width: 480px) {
+    :root {
+        --size-height-card: 125px;
+    }
+    #cards-container {
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .board-players {
+        left: auto;
+    }
+    .player-container {
+        position: static;
+    }
+    .player-container.horizontal, .player-container.vertical {
+        width: 200px;
+        height: var(--size-height-card);
+    }
+    #pc-1 .name-player, #pc-2 .name-player, #pc-3 .name-player, #pc-4 .name-player {
+        inset: auto;
+    }
+    #deck-1, #deck-2, #deck-3, #deck-4 {
+        flex-direction: row;
+    }
+    .player-container.horizontal .card, .player-container.vertical .card {
+        width: 100px;
+        height: var(--size-height-card);
+    }
+    #main-play-btn {
+        height: 35px;
+        margin: 15px auto 0 auto;
+    }
+    .board-players {
+        position: static;
+        margin-left: 0;
+        margin-top: 0;
+    }
+}

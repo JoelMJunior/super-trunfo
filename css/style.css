@@ -1,5 +1,7 @@
 :root {
     --size-height-card: 130px;
+    --size-width-card: 100px;
+    --size-width-deck: 200px;
     --distance-name-player: 105%;
 }
 
@@ -26,7 +28,7 @@
 }
 
 #center-deck {
-    width: 200px;
+    width: var(--size-width-deck);
     height: var(--size-height-card);
     background-color: rgba(0, 0, 0, 0);
     border: 1px solid black;
@@ -46,7 +48,7 @@
     font-size: 1.2em;
     border: 1px outset darkred;
     border-radius: 2px;
-    cursor: pointer
+    cursor: pointer;
 }
 
 #main-play-btn:hover {
@@ -70,12 +72,12 @@
 }
 
 .player-container.horizontal {
-    width: 200px;
+    width: var(--size-width-deck);
     height: var(--size-height-card);
 }
 .player-container.vertical {
     width: var(--size-height-card);
-    height: 200px;
+    height: var(--size-width-deck);
 }
 
 #pc-1 {
@@ -140,12 +142,12 @@
 }
 
 .player-container.horizontal .card {
-    width: 100px;
+    width: var(--size-width-card);
     height: var(--size-height-card);
 }
 .player-container.vertical .card {
     width: var(--size-height-card);
-    height: 100px;
+    height: var(--size-width-card);
 }
 
 .board-players {
