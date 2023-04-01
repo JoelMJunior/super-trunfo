@@ -2,6 +2,8 @@ CONTINUAR NO RESPONSIVENESS.CSS
 
 - Fazer o código funcionar com número de jogadores variável.
 - Criar uma tela inicial que envolve o loading.
+- Permitir o jogador de colocar o seu nome.
+- Criar via html e css uma pokebola atrás das cartas.
 
 - Ajustar responsividade.
 - Mudar a cor do fundo da imagem de acordo com o tipo do pokemon.
