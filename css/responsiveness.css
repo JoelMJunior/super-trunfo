@@ -1,4 +1,6 @@
 @media only screen and (max-width: 480px) {
+        
+    /* ///////  MAIN BOX    /////// */
     :root {
         --size-height-card: 125px;
     }
@@ -13,7 +15,7 @@
         position: static;
     }
     .player-container.horizontal, .player-container.vertical {
-        width: 200px;
+        width: var(--size-width-deck);
         height: var(--size-height-card);
     }
     #pc-1 .name-player, #pc-2 .name-player, #pc-3 .name-player, #pc-4 .name-player {
@@ -23,7 +25,7 @@
         flex-direction: row;
     }
     .player-container.horizontal .card, .player-container.vertical .card {
-        width: 100px;
+        width: var(--size-width-card);
         height: var(--size-height-card);
     }
     #main-play-btn {
@@ -34,5 +36,25 @@
         position: static;
         margin-left: 0;
         margin-top: 0;
+        height: 70px;
+    }
+    /* ///////  SELECTED CARDS    /////// */
+}
+@media only screen and (max-width: 380px) {
+    
+    /* ///////  MAIN BOX    /////// */
+    :root {
+        --size-height-card: 100px;
+        --size-width-card: 80px;
+    }
+    #main-play-btn {
+        margin: 3px auto 0 auto;
+    }
+    .board-players {
+        position: static;
+        margin-left: 0;
+        margin-top: 0;
+        height: 65px;
+        font-size: 1em;
     }
 }
