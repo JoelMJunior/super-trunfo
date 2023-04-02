@@ -3,6 +3,13 @@
     --size-width-card: 100px;
     --size-width-deck: 200px;
     --distance-name-player: 105%;
+    --yellow-color: #fbd743;
+    --red-color: #ff1f1f;
+    --red-dark-color: #cc0000;
+    --blue-light-color: #5db9ff;
+    --blue-dark-color: #363b81;
+    --green-color: #b3a125;
+    --white-color: #ffffff;
 }
 
 * {

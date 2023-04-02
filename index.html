@@ -8,10 +8,26 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/selectedCard.css">
     <link rel="stylesheet" type="text/css" href="./css/gameOver.css">
+    <link rel="stylesheet" type="text/css" href="./css/loading.css">
     <link rel="stylesheet" type="text/css" href="./css/responsiveness.css">
 </head>
 
 <body>
+    <section id="loading">
+        <div class="load-container">
+            <p class="title-load">Bem-vindo</p>
+            <p class="text-load">
+                Esse é um jogo estilo Super Trunfo com Pokémons.<br>
+                Escolha uma característica. O jogador que tiver o maior valor ganha as cartas em disputa.
+            </p>
+            <div class="loading-icon">
+                <div class="lds-default"><div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+            <button class="btn-load" disabled>Jogar</button>
+        </div>
+    </section>
+
     <section id="main-box">
         <div id="cards-container">
             <div class="player-container horizontal" id="pc-1">

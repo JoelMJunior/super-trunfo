@@ -1,7 +1,6 @@
-CONTINUAR NO RESPONSIVENESS.CSS
-
+- Criar uma tela inicial que envolve o loading. (FALTA PROGRAMAR)
+- Padronizar as cores pelo root.
 - Fazer o código funcionar com número de jogadores variável.
-- Criar uma tela inicial que envolve o loading.
 - Permitir o jogador de colocar o seu nome.
 - Criar via html e css uma pokebola atrás das cartas.
 
