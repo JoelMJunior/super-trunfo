@@ -7,11 +7,14 @@ let pokemonList = [];
 let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
 let allListPl=[listPl1, listPl2, listPl3, listPl4, listDraw];
 const mainPlayBtn = document.querySelector('#main-play-btn');
+const btnLoadPlay = document.querySelector('#btn-load-play');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
 const btnResetGOver = document.querySelector('#btn-reset-gameover');
+const secLoading = document.querySelector('#loading');
 const secSelecCards = document.querySelector('.selected-cards');
 const secGameOver = document.querySelector('#gameover-sec'); 
+const loadIcon = document.querySelector('#loading-icon'); 
 const decks = [];
 const deckCenter = document.querySelector('#center-deck');
 const infoPlayers = [];
@@ -30,14 +33,31 @@ async function getInfoPokemon() {
     pokemonList = await getPokemon();
 };
 await getInfoPokemon();
-console.log(pokemonList);
 
-mainPlayBtn.addEventListener('click', openSelecCards);
-btnSelecCards.addEventListener('click', closeSelecCards);
-btnGameOver.addEventListener('click', openCloseGameOver);
-btnResetGOver.addEventListener('click', resetGame);
+afterload();
+function afterload() {
+    countPlayers(numbPlayers);
+    btnLoadPlay.disabled = false;
+    loadIcon.style.visibility = 'hidden';
+    for(let i = 0; i < atribButtons1.length; i++) {
+        atribButtons1[i].addEventListener('click', () => {
+            showAdvCards("on");
+            disableBtn(i);
+            takeCards();
+            compareValues(i);
+        });
+    }
+    btnLoadPlay.addEventListener('click', startGame);
+    mainPlayBtn.addEventListener('click', openSelecCards);
+    btnSelecCards.addEventListener('click', closeSelecCards);
+    btnGameOver.addEventListener('click', openCloseGameOver);
+    btnResetGOver.addEventListener('click', resetGame);
+}
 
-countPlayers(numbPlayers);
+function startGame() {
+    secLoading.style.display = 'none';
+};
+
 function countPlayers(nPlayers) {
     for(let i = 1; i < nPlayers + 1; i++){
         decks.push(document.querySelector(`#deck-${i}`));
@@ -154,14 +174,6 @@ function closeSelecCards() {
     defineAttribs();
 };
 
-for(let i = 0; i < atribButtons1.length; i++) {
-    atribButtons1[i].addEventListener('click', () => {
-        showAdvCards("on");
-        disableBtn(i);
-        takeCards();
-        compareValues(i);
-    });
-};
 
 function choseAtrib() {
     const auxAtrib = Math.floor(Math.random() * 5);
