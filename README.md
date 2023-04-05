@@ -1,5 +1,5 @@
-- Criar uma tela inicial que envolve o loading. (FALTA PROGRAMAR)
 - Padronizar as cores pelo root.
+- Fazer o código funcionar com número de cartas variável.
 - Fazer o código funcionar com número de jogadores variável.
 - Permitir o jogador de colocar o seu nome.
 - Criar via html e css uma pokebola atrás das cartas.

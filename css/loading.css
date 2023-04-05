@@ -38,6 +38,26 @@
     text-align: center;
 }
 
+.form {
+    display: flex;
+    width: 60%;
+    margin-top: 20px;
+}
+select {
+    width: 40px;
+    background-color: var(--blue-light-color);
+    color: var(--white-color);
+    border: 1.5px solid var(--blue-dark-color);
+    border-radius: 2px;
+}
+label[for=numb-players] {
+    margin-left: 10px;
+}
+
+#loading-icon {
+    margin-top: 5px;
+}
+
 #btn-load-play {
     width: 100px;
     height: 30px;
