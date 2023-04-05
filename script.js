@@ -36,7 +36,6 @@ await getInfoPokemon();
 
 afterload();
 function afterload() {
-    countPlayers(numbPlayers);
     btnLoadPlay.disabled = false;
     loadIcon.style.visibility = 'hidden';
     for(let i = 0; i < atribButtons1.length; i++) {
@@ -55,6 +54,9 @@ function afterload() {
 }
 
 function startGame() {
+    numbCardInit = document.querySelector('#numb-cards').value;
+    numbTotalCards = numbCardInit * numbPlayers;
+    countPlayers(numbPlayers);
     secLoading.style.display = 'none';
 };
 

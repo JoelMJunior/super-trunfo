@@ -1,6 +1,5 @@
-- Padronizar as cores pelo root.
-- Fazer o código funcionar com número de cartas variável.
 - Fazer o código funcionar com número de jogadores variável.
+- Alterar o atributo HP para Altura.
 - Permitir o jogador de colocar o seu nome.
 - Criar via html e css uma pokebola atrás das cartas.
 
