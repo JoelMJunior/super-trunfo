@@ -36,16 +36,16 @@
 #btn-ok-gameover button {
     width: 150px;
     height: 50px;
-    background-color: darkred;
+    background-color: var(--red-dark-color);
     color: white;
     font-size: 1.2em;
-    border: 2px outset darkred;
+    border: 2px outset var(--red-dark-color);
     border-radius: 3px;
     cursor: pointer;
 }
 
 #btn-ok-gameover button:hover {
-    background-color: red;
+    background-color: var(--red-color);
 }
 
 #btn-reset-gameover {
@@ -55,15 +55,15 @@
 #btn-reset-gameover button {
     width: 150px;
     height: 50px;
-    background-color: darkred;
+    background-color: var(--red-dark-color);
     color: white;
     font-size: 1.2em;
-    border: 2px outset darkred;
+    border: 2px outset var(--red-dark-color);
     border-radius: 3px;
     cursor: pointer;
     margin-left: 2em;
 }
 
 #btn-reset-gameover button:hover {
-    background-color: red;
+    background-color: var(--red-color);
 }

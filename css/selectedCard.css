@@ -4,7 +4,7 @@
 }
 
 .selected-cards {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(0, 0, 0, 0.95);
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -36,8 +36,8 @@
 .tag-selec-card {
     width: fit-content;
     padding: 5px;
-    background-color: darkred;
-    color: white;
+    background-color: var(--red-dark-color);
+    color: var(--white-color);
     font-size: 1.2em;
     border-radius: 3px;
     margin-bottom: 1em;
@@ -46,8 +46,8 @@
 .form-card {
     width: var(--width-form-card);
     height: var(--height-form-card);
-    background-color: green;
-    border: 2px outset darkgreen;
+    background-color: var(--blue-dark-color);
+    border: 2px outset var(--blue-dark-color);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -57,7 +57,7 @@
 .title-card {
     width: 90%;
     height: 8.5%;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: var(--blue-light-color);
     margin-top: 5%;
     border-radius: 2px 2px 0 0;
     display: flex;
@@ -66,7 +66,7 @@
 .number-card {
     width: 18.5%;
     height: 100%;
-    background-color: blueviolet;
+    background-color: var(--yellow-dark-color);
     border-radius: 2px 0 0 0;
     display: flex;
     justify-content: center;
@@ -96,13 +96,13 @@
     align-items: center;
     width: 90%;
     height: 40%;
-    background-color: rgb(139, 2, 2);
+    background-color: var(--red-dark-color);
 }
 
 .image-card img {
     width: 130px;
     padding: 8px;
-    background-color: rgba(230, 215, 5, 0.733);
+    background-color: var(--yellow-color);
     border-radius: 50% 50%;
 }
 
@@ -167,14 +167,14 @@
 #btn-selected-cards button {
     width: 150px;
     height: 50px;
-    background-color: darkred;
+    background-color: var(--red-dark-color);
     color: white;
     font-size: 1.2em;
-    border: 2px outset darkred;
+    border: 2px outset var(--red-dark-color);
     border-radius: 3px;
     cursor: pointer;
 }
 
 #btn-selected-cards button:hover {
-    background-color: red;
+    background-color: var(--red-color);
 }

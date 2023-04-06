@@ -1,7 +1,9 @@
-- Fazer o código funcionar com número de jogadores variável.
+- Pensar em uma forma de dispor os decks de forma automática na main-box.
+- Criar via html e css uma pokebola atrás das cartas.
+- Fazer o código funcionar com número de jogadores variável. 
 - Alterar o atributo HP para Altura.
 - Permitir o jogador de colocar o seu nome.
-- Criar via html e css uma pokebola atrás das cartas.
+- Apresentar todas as cartas do jogador no início do jogo.
 
 - Ajustar responsividade.
 - Mudar a cor do fundo da imagem de acordo com o tipo do pokemon.
