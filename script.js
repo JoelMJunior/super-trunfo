@@ -56,7 +56,13 @@ function afterload() {
 
 function startGame() {
     namePl1 = document.querySelector('#nick').value;
-    document.querySelector('.name-player').querySelector('p').textContent = namePl1;
+    if(namePl1 !== "") {
+        document.querySelector('.name-player').querySelector('p').textContent = namePl1;
+        document.querySelector('#info-pl-1').querySelector('.info-name').textContent = namePl1;
+    } else {
+        document.querySelector('.name-player').querySelector('p').textContent = 'Player 1';
+        document.querySelector('#info-pl-1').querySelector('.info-name').textContent = 'Player 1';
+    }
     
     numbCardInit = document.querySelector('#numb-cards').value;
     numbTotalCards = numbCardInit * numbPlayers;
@@ -68,11 +74,6 @@ function countPlayers(nPlayers) {
     for(let i = 1; i < nPlayers + 1; i++){
         decks.push(document.querySelector(`#deck-${i}`));
         infoPlayers.push(document.querySelector(`#info-pl-${i}`));
-        if(i===1){
-            infoPlayers[i-1].querySelector('.info-name').textContent = namePl1;
-        } else {
-            infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
-        }
         cardsSelec.push(document.querySelector(`#card-pl-${i}`));
         atribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.atributes-card'));
     }

@@ -2,7 +2,6 @@
 - Criar via html e css uma pokebola atrás das cartas.
 - Fazer o código funcionar com número de jogadores variável. 
 - Alterar o atributo HP para Altura.
-- Permitir o jogador de colocar o seu nome.
 - Apresentar todas as cartas do jogador no início do jogo.
 
 - Ajustar responsividade.
