@@ -3,6 +3,7 @@ import { getPokemon } from './servicePokemonApi.js';
 let numbPlayers = 4;
 let numbTotalCards = 12;
 let numbCardInit = 3;
+let namePl1;
 let pokemonList = []; 
 let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
 let allListPl=[listPl1, listPl2, listPl3, listPl4, listDraw];
@@ -54,6 +55,9 @@ function afterload() {
 }
 
 function startGame() {
+    namePl1 = document.querySelector('#nick').value;
+    document.querySelector('.name-player').querySelector('p').textContent = namePl1;
+    
     numbCardInit = document.querySelector('#numb-cards').value;
     numbTotalCards = numbCardInit * numbPlayers;
     countPlayers(numbPlayers);
@@ -64,7 +68,11 @@ function countPlayers(nPlayers) {
     for(let i = 1; i < nPlayers + 1; i++){
         decks.push(document.querySelector(`#deck-${i}`));
         infoPlayers.push(document.querySelector(`#info-pl-${i}`));
-        infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
+        if(i===1){
+            infoPlayers[i-1].querySelector('.info-name').textContent = namePl1;
+        } else {
+            infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
+        }
         cardsSelec.push(document.querySelector(`#card-pl-${i}`));
         atribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.atributes-card'));
     }

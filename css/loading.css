@@ -54,6 +54,10 @@ label[for=numb-players] {
     margin-left: 10px;
 }
 
+.nick-div {
+    margin-top: 20px;
+}
+
 #loading-icon {
     margin-top: 5px;
 }
