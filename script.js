@@ -20,8 +20,8 @@ const decks = [];
 const deckCenter = document.querySelector('#center-deck');
 const infoPlayers = [];
 const cardsSelec = [];
-const atribButtons1 = document.querySelector('#player-1').getElementsByClassName('button-card');
-const atribPlayers = [];
+const attribButtons1 = document.querySelector('#player-1').getElementsByClassName('button-card');
+const attribPlayers = [];
 const textResult = document.querySelector('#text-result');
 const textGameOver = document.querySelector('#title-gameover');
 let maxCount = 0;
@@ -39,8 +39,8 @@ afterload();
 function afterload() {
     btnLoadPlay.disabled = false;
     loadIcon.style.visibility = 'hidden';
-    for(let i = 0; i < atribButtons1.length; i++) {
-        atribButtons1[i].addEventListener('click', () => {
+    for(let i = 0; i < attribButtons1.length; i++) {
+        attribButtons1[i].addEventListener('click', () => {
             showAdvCards("on");
             disableBtn(i);
             takeCards();
@@ -78,7 +78,7 @@ function countPlayers(nPlayers) {
             infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
         }
         cardsSelec.push(document.querySelector(`#card-pl-${i}`));
-        atribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.atributes-card'));
+        attribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.attributes-card'));
     }
     addCard();
     infoCards();
@@ -112,7 +112,7 @@ function infoCards() {
                 numbPlayers -= 1;
                 delete decks[i];
                 delete cardsSelec[i];
-                delete atribPlayers[i];
+                delete attribPlayers[i];
                 idGameOverPl.push(i+1);
                 if(idWinners.includes(i+1)) {
                     idWinners.splice(idWinners.indexOf(i+1), 1);
@@ -153,11 +153,11 @@ function defineAttribs() {
             cardsSelec[i].querySelector('.number-card').querySelector('p').innerText = `#${pokemonList[allListPl[i][0]].id}`;
             cardsSelec[i].querySelector('.name-card').querySelector('p').innerText = pokemonList[allListPl[i][0]].name;
             cardsSelec[i].querySelector('.image-card').querySelector('img').setAttribute('src', pokemonList[allListPl[i][0]].image);
-            atribPlayers[i].children[0].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[0];
-            atribPlayers[i].children[1].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[1];
-            atribPlayers[i].children[2].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[2];
-            atribPlayers[i].children[3].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[3];
-            atribPlayers[i].children[4].querySelector('.atrib-value').textContent = pokemonList[allListPl[i][0]].attribs[4];
+            attribPlayers[i].children[0].querySelector('.attrib-value').textContent = pokemonList[allListPl[i][0]].attribs[0];
+            attribPlayers[i].children[1].querySelector('.attrib-value').textContent = pokemonList[allListPl[i][0]].attribs[1];
+            attribPlayers[i].children[2].querySelector('.attrib-value').textContent = pokemonList[allListPl[i][0]].attribs[2];
+            attribPlayers[i].children[3].querySelector('.attrib-value').textContent = pokemonList[allListPl[i][0]].attribs[3];
+            attribPlayers[i].children[4].querySelector('.attrib-value').textContent = pokemonList[allListPl[i][0]].attribs[4];
         }
     }
 }
@@ -169,7 +169,7 @@ function openSelecCards() {
         if(oldWinner === 1) {
             cardsSelec[0].style.display = 'flex';
         } else {
-            choseAtrib();
+            choseAttrib();
         }
     }
 };
@@ -177,7 +177,7 @@ function openSelecCards() {
 function closeSelecCards() {
     secSelecCards.style.display = 'none';  
     showAdvCards("off");
-    disableBtn(atribButtons1.length);
+    disableBtn(attribButtons1.length);
     if(idGameOverPl.length > 0) {
         for(let id of idGameOverPl) {
             document.querySelector(`#card-pl-${id}`).style.display = 'none';
@@ -189,12 +189,12 @@ function closeSelecCards() {
 };
 
 
-function choseAtrib() {
-    const auxAtrib = Math.floor(Math.random() * 5);
+function choseAttrib() {
+    const auxAttrib = Math.floor(Math.random() * 5);
     showAdvCards("on");
-    disableBtn(auxAtrib);
+    disableBtn(auxAttrib);
     takeCards();
-    compareValues(auxAtrib);
+    compareValues(auxAttrib);
 };
 
 function showAdvCards(turn) {
@@ -225,21 +225,21 @@ function showAdvCards(turn) {
 };
 
 function disableBtn(id) {
-    const allAtribBtns = document.getElementsByClassName('button-card');
+    const allAttribBtns = document.getElementsByClassName('button-card');
     
-    if(id < atribButtons1.length) {
-        for(let ap of atribPlayers) {
+    if(id < attribButtons1.length) {
+        for(let ap of attribPlayers) {
             if(ap != undefined) {
                 ap.children[id].classList.add('chosen');
             }
         }
-        for(let i = 0; i < allAtribBtns.length; i++) {
-            allAtribBtns[i].disabled = true;
+        for(let i = 0; i < allAttribBtns.length; i++) {
+            allAttribBtns[i].disabled = true;
         }
     } else {
-        for(let i = 0; i < allAtribBtns.length; i++) {
-            allAtribBtns[i].classList.remove('chosen');
-            allAtribBtns[i].disabled = false;
+        for(let i = 0; i < allAttribBtns.length; i++) {
+            allAttribBtns[i].classList.remove('chosen');
+            allAttribBtns[i].disabled = false;
         }
     }
 };
@@ -266,16 +266,16 @@ function takeCards() {
 
 function compareValues(id) {
     let values = [];
-    for(let ap of atribPlayers) {
+    for(let ap of attribPlayers) {
         if(ap != undefined) {
             if(maxCount > 1) {
-                if(idWinners.includes(atribPlayers.indexOf(ap)+1)) {
-                    values.push(Number(ap.children[id].querySelector('.atrib-value').textContent));
+                if(idWinners.includes(attribPlayers.indexOf(ap)+1)) {
+                    values.push(Number(ap.children[id].querySelector('.attrib-value').textContent));
                 } else {
                     values.push(-Infinity);
                 }
             } else {
-                values.push(Number(ap.children[id].querySelector('.atrib-value').textContent));
+                values.push(Number(ap.children[id].querySelector('.attrib-value').textContent));
             }
         } else {
             values.push(-Infinity);
@@ -308,11 +308,11 @@ function compareValues(id) {
 };
 
 function defineTextResult(mc, atb) {
-    const atribText = document.querySelector(`#player-1`).querySelector('.atributes-card').children[atb].querySelector('.atrib-text').textContent;
+    const attribText = document.querySelector(`#player-1`).querySelector('.attributes-card').children[atb].querySelector('.attrib-text').textContent;
     if(mc === 1) {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribText}.<br> O jogador ${idWinners} foi o vencedor.`;
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${attribText}.<br> O jogador ${idWinners} foi o vencedor.`;
     } else {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${atribText}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
+        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${attribText}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
     }
 };
 

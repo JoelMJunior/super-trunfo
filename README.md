@@ -1,4 +1,3 @@
-- Alterar o atributo HP para Altura.
 - Pensar em uma forma de dispor os decks de forma automática na main-box.
 - Criar via html e css uma pokebola atrás das cartas.
 - Fazer o código funcionar com número de jogadores variável. 
