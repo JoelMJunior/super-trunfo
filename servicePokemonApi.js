@@ -10,14 +10,14 @@ async function getPokemon() {
     }
     const pokemonListMapped = pokemonList
     .map((poke) => {
-        const { id, name, sprites, stats, weight } = poke;
+        const { id, name, height, sprites, stats, weight } = poke;
         const image = sprites.front_default;
         const attribs = stats.filter(st => {
-            return stats.indexOf(st) === 0 || stats.indexOf(st) === 1 || stats.indexOf(st) === 2 || stats.indexOf(st) === 5
+            return stats.indexOf(st) === 1 || stats.indexOf(st) === 2 || stats.indexOf(st) === 5
         }).map(st => {
             return st.base_stat;
         });
-        attribs.push(weight);
+        attribs.push(height/10, weight/10);
         return { id, name, image, attribs };
     });
     return pokemonListMapped;
