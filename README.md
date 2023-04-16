@@ -2,6 +2,7 @@
 - Criar via html e css uma pokebola atrás das cartas.
 - Fazer o código funcionar com número de jogadores variável. 
 - Apresentar todas as cartas do jogador no início do jogo.
+- Fazer aparecer a carta do jogador quando ele clicar nela no seu deck.
 
 - Ajustar responsividade.
 - Mudar a cor do fundo da imagem de acordo com o tipo do pokemon.
