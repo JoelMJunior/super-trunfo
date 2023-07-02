@@ -62,11 +62,29 @@ label[for=numb-players] {
     margin-top: 5px;
 }
 
-#btn-load-play {
+#btn-load-choose {
     width: 100px;
     height: 30px;
     margin: 0 auto 20px auto;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-color);
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px outset var(--red-dark-color);
+    background-color: var(--red-dark-color);
+}
+#btn-load-choose:enabled:hover {
+    background-color: var(--red-color);
+}
+
+#btn-load-play {
+    width: 100px;
+    height: 30px;
+    margin: 0 auto 20px auto;
+    display: none;
     justify-content: center;
     align-items: center;
     color: var(--white-color);
@@ -89,6 +107,9 @@ label[for=numb-players] {
 
 
 /* LOADING ICON EFFECT */
+#loading-icon {
+    visibility: hidden;
+}
 .lds-default {
     display: inline-block;
     position: relative;

@@ -8,6 +8,7 @@ let pokemonList = [];
 let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
 let allListPl=[listPl1, listPl2, listPl3, listPl4, listDraw];
 const mainPlayBtn = document.querySelector('#main-play-btn');
+const btnLoadChoose = document.querySelector('#btn-load-choose');
 const btnLoadPlay = document.querySelector('#btn-load-play');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
@@ -30,12 +31,21 @@ let oldWinner = 1;
 let idGameOverPl = [];
 
 
+btnLoadChoose.addEventListener('click', () => {
+    numbCardInit = document.querySelector('#numb-cards').value;
+    numbTotalCards = numbCardInit * numbPlayers;
+    btnLoadChoose.style.display = 'none';
+    loadIcon.style.visibility = 'visible';
+    btnLoadPlay.style.display = 'flex';
+    // Adicionar sorteio dos Ids //
+    getInfoPokemon();
+});
+
 async function getInfoPokemon() {
     pokemonList = await getPokemon();
+    afterload();
 };
-await getInfoPokemon();
 
-afterload();
 function afterload() {
     btnLoadPlay.disabled = false;
     loadIcon.style.visibility = 'hidden';
