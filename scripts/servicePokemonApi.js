@@ -1,10 +1,10 @@
 const apiUrl = `https://pokeapi.co/api/v2/pokemon`;
 
-async function getPokemon() {
+async function getPokemon(list) {
     const pokemonList = [];
-
-    for(let i=1; i <= 151; i++) {
-        const response = await fetch(`${apiUrl}/${i}`);
+    
+    for(let i=0; i < list.length; i++) {
+        const response = await fetch(`${apiUrl}/${list[i]}`);
         const pokemon = await response.json();
         pokemonList.push(pokemon);
     }
@@ -19,7 +19,7 @@ async function getPokemon() {
         });
         attribs.push(height/10, weight/10);
         return { id, name, image, attribs };
-    });
+    }); 
     return pokemonListMapped;
 }
 
