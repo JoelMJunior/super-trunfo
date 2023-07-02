@@ -82,7 +82,7 @@ function countPlayers(nPlayers) {
     }
     addCard();
     infoCards();
-    raffleIds();
+    shuffleIds();
     defineAttribs();
 };
 
@@ -122,7 +122,7 @@ function infoCards() {
     }
 };
 
-function raffleIds() {
+function shuffleIds() {
     const exemp = [];
     for(let i = 0; i < numbTotalCards; i++) {
         exemp[i] = i;
