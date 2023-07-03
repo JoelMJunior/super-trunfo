@@ -1,16 +1,18 @@
-Um jogo de super trunfo de Pokémon que consome a API: https://pokeapi.co/api/v2/pokemon  
+Um jogo de super trunfo de Pokémon que consome a API: https://pokeapi.co/api/v2/pokemon <br>
+<br>
+Próximos passos:<br>
+> Trocar o 151 em ruffleIds por um valor de variável.<br>
+> Colocar histórico dos resultados.<br>
+> Criar via html e css uma pokebola atrás das cartas.<br>
+> Fazer o código funcionar com número de jogadores variável.<br>
+> Apresentar todas as cartas do jogador no início do jogo.<br>
+> Fazer aparecer a carta do jogador quando ele clicar nela no seu deck.<br>
   
-Próximos passos:  
-> Criar via html e css uma pokebola atrás das cartas.  
-> Fazer o código funcionar com número de jogadores variável.  
-> Apresentar todas as cartas do jogador no início do jogo.  
-> Fazer aparecer a carta do jogador quando ele clicar nela no seu deck.  
-  
-> Ajustar responsividade.  
-> Mudar a cor do fundo da imagem de acordo com o tipo do pokemon.  
-> Mudar a cor da label na main box quando o jogador perder todas as cartas.  
-> Colocar favicon.  
-> Simplicar no CSS style.css o comandos para o #deck-center.  
-> Mudar de class para id em section class="selected-cards" no HTML.  
-> Revisar 'while' em distrCard.  
+> Ajustar responsividade.<br>
+> Mudar a cor do fundo da imagem de acordo com o tipo do pokemon.<br>
+> Mudar a cor da label na main box quando o jogador perder todas as cartas.<br>
+> Colocar favicon.<br>
+> Simplicar no CSS style.css o comandos para o #deck-center.<br>
+> Mudar de class para id em section class="selected-cards" no HTML.<br>
+> Revisar 'while' em distrCard.<br>
 > Tentar entender como o allListPl altera seu valor antes da função takeCards.
