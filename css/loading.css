@@ -73,11 +73,11 @@ label[for=numb-players] {
     font-size: 1em;
     cursor: pointer;
     border-radius: 2px;
-    border: 1px outset var(--red-dark-color);
-    background-color: var(--red-dark-color);
+    border: 1px outset var(--blue-dark-color);
+    background-color: var(--blue-light-color);
 }
 #btn-load-choose:enabled:hover {
-    background-color: var(--red-color);
+    background-color: var(--blue-dark-color);
 }
 
 #btn-load-play {
