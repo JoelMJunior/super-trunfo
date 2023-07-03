@@ -88,6 +88,10 @@
     height: var(--size-width-deck);
 }
 
+#center-cards-btn {
+    position: absolute;
+}
+
 #pc-1 {
     bottom: 0;
 }
@@ -111,6 +115,11 @@
 }
 #pc-4 .name-player {
     top: var(--distance-name-player);
+}
+#center-cards-btn .name-player {
+    position: absolute;
+    top: 5px;
+    left: 5px;
 }
 
 .decks {

@@ -36,7 +36,7 @@
 .tag-selec-card {
     width: fit-content;
     padding: 5px;
-    background-color: var(--red-dark-color);
+    background-color: var(--blue-dark-color);
     color: var(--white-color);
     font-size: 1.2em;
     border-radius: 3px;
