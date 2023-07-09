@@ -66,21 +66,17 @@ function ruffleIds(totalIds) {
 function mainBoxDisplay(nPlayers) {
     if(nPlayers === 2) {
         for(let i = nPlayers + 1; i <= 4; i++) {
-            let elemPc = document.querySelector(`#pc-${i}`);
-            elemPc.style.display = 'none';
-            let elemInfoPl = document.querySelector(`#info-pl-${i}`);
-            elemInfoPl.style.display = 'none';
+            document.querySelector(`#pc-${i}`).style.display = 'none';
+            document.querySelector(`#info-pl-${i}`).style.display = 'none';
         }
         const p2Pc = document.querySelector(`#pc-2`);
-        p2Pc.classList.remove('vertical');
-        p2Pc.classList.add('horizontal');
+        p2Pc.classList.replace('vertical', 'horizontal');
         p2Pc.style.right = 'auto';
         p2Pc.style.top = '0';
         p2Pc.querySelector('.name-player').style.bottom = 'auto';
         p2Pc.querySelector('.name-player').style.left = 'var(--distance-name-player)';
         p2Pc.querySelector('#deck-2').style.flexDirection = 'row-reverse';
-        const p2InfoPl = document.querySelector(`#info-pl-2`);
-        p2InfoPl.style.borderRight = '0';
+        document.querySelector(`#info-pl-2`).style.borderRight = '0';
     }
 }
 
