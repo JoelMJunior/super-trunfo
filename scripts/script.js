@@ -1,8 +1,8 @@
 import { getPokemon } from './servicePokemonApi.js';
 
 let numbPlayers = 4;
-let numbTotalCards = 12;
-let numbCardInit = 3;
+let numbTotalCards = 16;
+let numbCardInit = 4;
 let namePl1;
 let pokemonList = []; 
 let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
@@ -33,12 +33,14 @@ let idGameOverPl = [];
 
 
 btnLoadChoose.addEventListener('click', () => {
-    numbCardInit = document.querySelector('#numb-cards').value;
+    numbCardInit = Number(document.querySelector('#numb-cards').value);
+    numbPlayers = Number(document.querySelector('#numb-players').value);
     numbTotalCards = numbCardInit * numbPlayers;
     btnLoadChoose.style.display = 'none';
     loadIcon.style.visibility = 'visible';
     btnLoadPlay.style.display = 'flex';
     ruffleIds(numbTotalCards);
+    mainBoxDisplay(numbPlayers);
     getInfoPokemon();
 });
 
@@ -58,6 +60,27 @@ function ruffleIds(totalIds) {
 
         // Armazenando o número sorteado no vetor
         idsInGame.push(ruffledNumb);
+    }
+}
+
+function mainBoxDisplay(nPlayers) {
+    if(nPlayers === 2) {
+        for(let i = nPlayers + 1; i <= 4; i++) {
+            let elemPc = document.querySelector(`#pc-${i}`);
+            elemPc.style.display = 'none';
+            let elemInfoPl = document.querySelector(`#info-pl-${i}`);
+            elemInfoPl.style.display = 'none';
+        }
+        const p2Pc = document.querySelector(`#pc-2`);
+        p2Pc.classList.remove('vertical');
+        p2Pc.classList.add('horizontal');
+        p2Pc.style.right = 'auto';
+        p2Pc.style.top = '0';
+        p2Pc.querySelector('.name-player').style.bottom = 'auto';
+        p2Pc.querySelector('.name-player').style.left = 'var(--distance-name-player)';
+        p2Pc.querySelector('#deck-2').style.flexDirection = 'row-reverse';
+        const p2InfoPl = document.querySelector(`#info-pl-2`);
+        p2InfoPl.style.borderRight = '0';
     }
 }
 
@@ -94,15 +117,13 @@ function startGame() {
         document.querySelector('.name-player').querySelector('p').textContent = 'Player 1';
         document.querySelector('#info-pl-1').querySelector('.info-name').textContent = 'Player 1';
     }
-    
-    numbCardInit = document.querySelector('#numb-cards').value;
-    numbTotalCards = numbCardInit * numbPlayers;
+
     countPlayers(numbPlayers);
     secLoading.style.display = 'none';
 };
 
 function countPlayers(nPlayers) {
-    for(let i = 1; i < nPlayers + 1; i++){
+    for(let i = 1; i < nPlayers + 1; i++) {
         decks.push(document.querySelector(`#deck-${i}`));
         infoPlayers.push(document.querySelector(`#info-pl-${i}`));
         if(i != 1) {
