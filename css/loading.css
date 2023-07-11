@@ -40,9 +40,16 @@
 
 .form {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 60%;
     margin-top: 20px;
 }
+
+.form-numbs {
+    display: flex;
+}
+
 select {
     width: 40px;
     background-color: var(--blue-light-color);

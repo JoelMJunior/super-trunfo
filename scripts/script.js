@@ -33,12 +33,22 @@ let idGameOverPl = [];
 
 
 btnLoadChoose.addEventListener('click', () => {
-    numbCardInit = Number(document.querySelector('#numb-cards').value);
-    numbPlayers = Number(document.querySelector('#numb-players').value);
+    const elemNumbCards = document.querySelector('#numb-cards');
+    const elemNumbPl = document.querySelector('#numb-players');
+    numbCardInit = Number(elemNumbCards.value);
+    numbPlayers = Number(elemNumbPl.value);
     numbTotalCards = numbCardInit * numbPlayers;
+    elemNumbCards.setAttribute('disabled', '');
+    elemNumbPl.setAttribute('disabled', '');
+
+    const elemNick = document.querySelector('#nick');
+    namePl1 = elemNick.value;
+    elemNick.setAttribute('disabled', '');
+
     btnLoadChoose.style.display = 'none';
     loadIcon.style.visibility = 'visible';
     btnLoadPlay.style.display = 'flex';
+
     ruffleIds(numbTotalCards);
     mainBoxDisplay(numbPlayers);
     getInfoPokemon();
@@ -105,7 +115,7 @@ function afterload() {
 }
 
 function startGame() {
-    namePl1 = document.querySelector('#nick').value;
+    
     if(namePl1 !== "") {
         document.querySelector('.name-player').querySelector('p').textContent = namePl1;
         document.querySelector('#info-pl-1').querySelector('.info-name').textContent = namePl1;
