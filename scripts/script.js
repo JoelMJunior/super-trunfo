@@ -3,7 +3,7 @@ import { getPokemon } from './servicePokemonApi.js';
 let numbPlayers = 4;
 let numbTotalCards = 16;
 let numbCardInit = 4;
-let namePl1;
+let namesPlyrs = [];
 let pokemonList = []; 
 let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
 let allListPl=[listPl1, listPl2, listPl3, listPl4, listDraw];
@@ -42,13 +42,14 @@ btnLoadChoose.addEventListener('click', () => {
     elemNumbPl.setAttribute('disabled', '');
 
     const elemNick = document.querySelector('#nick');
-    namePl1 = elemNick.value;
     elemNick.setAttribute('disabled', '');
 
     btnLoadChoose.style.display = 'none';
     loadIcon.style.visibility = 'visible';
     btnLoadPlay.style.display = 'flex';
 
+    console.log(elemNick.value);
+    addNick(elemNick.value);
     ruffleIds(numbTotalCards);
     mainBoxDisplay(numbPlayers);
     getInfoPokemon();
@@ -115,18 +116,26 @@ function afterload() {
 }
 
 function startGame() {
-    addNick();
     countPlayers(numbPlayers);
     secLoading.style.display = 'none';
 };
 
-function addNick() {
+function addNick(namePl1) {
     if(namePl1 !== "") {
-        document.querySelector('.name-player').querySelector('p').textContent = namePl1;
-        document.querySelector('#info-pl-1').querySelector('.info-name').textContent = namePl1;
+        namesPlyrs[0] = namePl1;
+        document.querySelector('.name-player').querySelector('span').textContent = namesPlyrs[0];
+        document.querySelector('#info-pl-1').querySelector('.info-name').textContent = namesPlyrs[0];
     } else {
-        document.querySelector('.name-player').querySelector('p').textContent = 'Player 1';
-        document.querySelector('#info-pl-1').querySelector('.info-name').textContent = 'Player 1';
+        namesPlyrs[0] = 'Jogador 1';
+        document.querySelector('.name-player').querySelector('span').textContent = namesPlyrs[0];
+        document.querySelector('#info-pl-1').querySelector('.info-name').textContent = namesPlyrs[0];
+    }
+    for(let i = 1; i < numbPlayers; i++) {
+        namesPlyrs[i] = `Jogador ${i+1}`;
+    }
+    const tagsNames = document.getElementsByClassName('tag-selec-card');
+    for(let i = 0; i < numbPlayers; i++) {
+        tagsNames[i].innerText = namesPlyrs[i];
     }
 }
 
@@ -135,7 +144,7 @@ function countPlayers(nPlayers) {
         decks.push(document.querySelector(`#deck-${i}`));
         infoPlayers.push(document.querySelector(`#info-pl-${i}`));
         if(i != 1) {
-            infoPlayers[i-1].querySelector('.info-name').textContent = `Player ${i}`;
+            infoPlayers[i-1].querySelector('.info-name').textContent = `Jogador ${i}`;
         }
         cardsSelec.push(document.querySelector(`#card-pl-${i}`));
         attribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.attributes-card'));
@@ -369,9 +378,10 @@ function compareValues(id) {
 function defineTextResult(mc, atb) {
     const attribText = document.querySelector(`#player-1`).querySelector('.attributes-card').children[atb].querySelector('.attrib-text').textContent;
     if(mc === 1) {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${attribText}.<br> O jogador ${idWinners} foi o vencedor.`;
+        textResult.querySelector('p').innerHTML = `${namesPlyrs[oldWinner-1]} escolheu o atributo ${attribText}.<br>${namesPlyrs[idWinners-1]} foi o vencedor.`;
     } else {
-        textResult.querySelector('p').innerHTML = `O jogador ${oldWinner} escolheu o atributo ${attribText}.<br> Os jogadores ${idWinners.join(', ')} empataram.`;
+        let nameWinners = idWinners.map(ind => namesPlyrs[ind-1]);
+        textResult.querySelector('p').innerHTML = `${namesPlyrs[oldWinner-1]} escolheu o atributo ${attribText}.<br>${nameWinners.join(', ')} empataram.`;
     }
 };
 
@@ -453,15 +463,17 @@ function openCloseGameOver() {
 function titleGameOver(idGO) {
     if(numbPlayers > 1) {
         if(idGO.length > 1) {
-            textGameOver.querySelector('p').innerText = `Os jogadores ${idGO.join(', ')} perderam`;
+            let nameLoosers = idGO.map(ind => namesPlyrs[ind-1]);
+            textGameOver.querySelector('p').innerText = `${nameLoosers.join(', ')} perderam`;
         } else if(idGO.length === 1) {
-            textGameOver.querySelector('p').innerText = `O jogador ${idGO} perdeu`;
+            textGameOver.querySelector('p').innerText = `${namesPlyrs[idGO-1]} perdeu`;
         }
     } else if(numbPlayers === 1) {
         const indWin = decks.findIndex((indW) => { return indW != undefined });
-        textGameOver.querySelector('p').innerText = `O jogador ${indWin+1} ganhou o jogo`;
+        textGameOver.querySelector('p').innerText = `${namesPlyrs[indWin]} ganhou o jogo`;
     } else if(numbPlayers === 0) {
-        textGameOver.querySelector('p').innerText = `Os jogadores ${idGO.join(', ')} empataram o jogo`;
+        let nameWinners = idGO.map(ind => namesPlyrs[ind-1]);
+        textGameOver.querySelector('p').innerText = `${nameWinners.join(', ')} empataram o jogo`;
     }
 };
 

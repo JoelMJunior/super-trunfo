@@ -1,6 +1,7 @@
 Um jogo de super trunfo de Pokémon que consome a API: https://pokeapi.co/api/v2/pokemon <br>
 <br>
 Próximos passos:<br>
+> Analisar situação: Empate seguido de derrota de um dos jogadores que empataram (próxima rodada e texto final).<br>
 > Fazer aparecer a carta do jogador quando ele clicar nela no seu deck.<br>
 > Trocar o 151 em ruffleIds por um valor de variável.<br>
 > Colocar histórico dos resultados.<br>
