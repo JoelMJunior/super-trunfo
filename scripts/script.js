@@ -115,7 +115,12 @@ function afterload() {
 }
 
 function startGame() {
-    
+    addNick();
+    countPlayers(numbPlayers);
+    secLoading.style.display = 'none';
+};
+
+function addNick() {
     if(namePl1 !== "") {
         document.querySelector('.name-player').querySelector('p').textContent = namePl1;
         document.querySelector('#info-pl-1').querySelector('.info-name').textContent = namePl1;
@@ -123,10 +128,7 @@ function startGame() {
         document.querySelector('.name-player').querySelector('p').textContent = 'Player 1';
         document.querySelector('#info-pl-1').querySelector('.info-name').textContent = 'Player 1';
     }
-
-    countPlayers(numbPlayers);
-    secLoading.style.display = 'none';
-};
+}
 
 function countPlayers(nPlayers) {
     for(let i = 1; i < nPlayers + 1; i++) {
