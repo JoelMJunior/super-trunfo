@@ -269,7 +269,7 @@ function showAdvCards(turn) {
     if(turn === "on") {
         for(let cs of cardsSelec) {
             if(cs != undefined) {
-                if(maxCount > 1) {
+                if(idWinners.length > 1) {
                     idWinners.forEach((ids) => {
                         if(cardsSelec.indexOf(cs) === ids-1) {
                             cs.style.display = 'flex';
@@ -313,10 +313,9 @@ function disableBtn(id) {
 };
 
 function takeCards() {
-
     for(let d of decks) {
         if(d != undefined) {
-            if(maxCount > 1) {
+            if(idWinners.length > 1) {
                 idWinners.forEach((ids) => {
                     if(decks.indexOf(d) === ids-1) {
                         d.removeChild(d.lastChild);
@@ -329,14 +328,13 @@ function takeCards() {
             }
         }
     }
-
 };
 
 function compareValues(id) {
     let values = [];
     for(let ap of attribPlayers) {
         if(ap != undefined) {
-            if(maxCount > 1) {
+            if(idWinners.length > 1) {
                 if(idWinners.includes(attribPlayers.indexOf(ap)+1)) {
                     values.push(Number(ap.children[id].querySelector('.attrib-value').textContent));
                 } else {
