@@ -1,7 +1,6 @@
 Um jogo de super trunfo de Pokémon que consome a API: https://pokeapi.co/api/v2/pokemon <br>
 <br>
 Próximos passos:<br>
-> Nos textos de explicação, colocar o 'e' no lugar da última vírgula.<br>
 > Trocar o 151 em ruffleIds por um valor de variável.<br>
 > Colocar histórico dos resultados.<br>
 > Criar via html e css uma pokebola atrás das cartas.<br>

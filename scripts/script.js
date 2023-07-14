@@ -390,7 +390,7 @@ function defineTextResult(mc, atb) {
         textResult.querySelector('p').innerHTML = `${namesPlyrs[oldWinner-1]} escolheu o atributo ${attribText}.<br>${namesPlyrs[idWinners-1]} foi o vencedor.`;
     } else {
         let nameWinners = idWinners.map(ind => namesPlyrs[ind-1]);
-        textResult.querySelector('p').innerHTML = `${namesPlyrs[oldWinner-1]} escolheu o atributo ${attribText}.<br>${nameWinners.join(', ')} empataram.`;
+        textResult.querySelector('p').innerHTML = `${namesPlyrs[oldWinner-1]} escolheu o atributo ${attribText}.<br>${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram.`;
     }
 };
 
@@ -474,7 +474,7 @@ function titleGameOver(idGO) {
     if(numbPlayers > 1) {
         if(idGO.length > 1) {
             let nameLoosers = idGO.map(ind => namesPlyrs[ind-1]);
-            textGameOver.querySelector('p').innerText = `${nameLoosers.join(', ')} perderam`;
+            textGameOver.querySelector('p').innerText = `${nameLoosers.slice(0,-1).join(', ')} e ${nameLoosers.slice(-1)} perderam`;
         } else if(idGO.length === 1) {
             textGameOver.querySelector('p').innerText = `${namesPlyrs[idGO-1]} perdeu`;
         }
@@ -483,7 +483,7 @@ function titleGameOver(idGO) {
         textGameOver.querySelector('p').innerText = `${namesPlyrs[indWin]} ganhou o jogo`;
     } else if(numbPlayers === 0) {
         let nameWinners = idGO.map(ind => namesPlyrs[ind-1]);
-        textGameOver.querySelector('p').innerText = `${nameWinners.join(', ')} empataram o jogo`;
+        textGameOver.querySelector('p').innerText = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram o jogo`;
     }
 };
 
