@@ -8,8 +8,7 @@ async function getPokemon(list) {
         const pokemon = await response.json();
         pokemonList.push(pokemon);
     }
-    const pokemonListMapped = pokemonList
-    .map((poke) => {
+    const pokemonListMapped = pokemonList.map((poke) => {
         const { id, name, height, sprites, stats, weight } = poke;
         const image = sprites.front_default;
         const attribs = stats.filter(st => {

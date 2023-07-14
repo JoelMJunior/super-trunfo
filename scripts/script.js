@@ -13,10 +13,11 @@ const btnLoadPlay = document.querySelector('#btn-load-play');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
 const btnResetGOver = document.querySelector('#btn-reset-gameover');
+const btnOKOneCard = document.querySelector('#btn-selec-one-card'); 
 const secLoading = document.querySelector('#loading');
 const secSelecCards = document.querySelector('.selected-cards');
 const secGameOver = document.querySelector('#gameover-sec'); 
-const loadIcon = document.querySelector('#loading-icon'); 
+const loadIcon = document.querySelector('#loading-icon');
 const decks = [];
 const deckCenter = document.querySelector('#center-deck');
 const infoPlayers = [];
@@ -48,7 +49,6 @@ btnLoadChoose.addEventListener('click', () => {
     loadIcon.style.visibility = 'visible';
     btnLoadPlay.style.display = 'flex';
 
-    console.log(elemNick.value);
     addNick(elemNick.value);
     ruffleIds(numbTotalCards);
     mainBoxDisplay(numbPlayers);
@@ -113,6 +113,7 @@ function afterload() {
     btnSelecCards.addEventListener('click', closeSelecCards);
     btnGameOver.addEventListener('click', openCloseGameOver);
     btnResetGOver.addEventListener('click', resetGame);
+    btnOKOneCard.addEventListener('click', closeSelecOneCard);
 }
 
 function startGame() {
@@ -150,6 +151,7 @@ function countPlayers(nPlayers) {
         attribPlayers.push(document.querySelector(`#player-${i}`).querySelector('.attributes-card'));
     }
     addCard();
+    addListenerCard();
     infoCards();
     shuffleIds();
     defineAttribs();
@@ -170,6 +172,15 @@ function addCard() {
             indexDeck++;
             indexCard = 0;
         }
+    }
+};
+
+function addListenerCard() {
+    const myDeck = Array.from(document.querySelector('#deck-1').getElementsByClassName('card'));
+    for(let c of myDeck) {
+        c.addEventListener('click', () => {
+            openSelecOneCard(myDeck.indexOf(c))
+        });
     }
 };
 
@@ -443,6 +454,7 @@ function distrCard(idPlayer, cardsCount) {
         }
     }
     infoCards();
+    addListenerCard();
 };
 
 function openCloseGameOver() {
@@ -474,6 +486,29 @@ function titleGameOver(idGO) {
         textGameOver.querySelector('p').innerText = `${nameWinners.join(', ')} empataram o jogo`;
     }
 };
+
+function openSelecOneCard(idCard) {
+    const sectionOneCard = document.querySelector('#selec-one-card');
+    sectionOneCard.style.display = 'flex';
+    
+    sectionOneCard.getElementsByClassName('tag-one-card').innerText = `${namesPlyrs[0]}`;
+    sectionOneCard.querySelector('.number-card').querySelector('p').innerText = `#${pokemonList[allListPl[0][idCard]].id}`;
+    sectionOneCard.querySelector('.name-card').querySelector('p').innerText = pokemonList[allListPl[0][idCard]].name;
+    sectionOneCard.querySelector('.image-card').querySelector('img').setAttribute('src', pokemonList[allListPl[0][idCard]].image);
+    
+    const atribsOneCard = sectionOneCard.querySelector('.attributes-card');
+
+    atribsOneCard.children[0].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[0];
+    atribsOneCard.children[1].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[1];
+    atribsOneCard.children[2].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[2];
+    atribsOneCard.children[3].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[3];
+    atribsOneCard.children[4].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[4];
+}
+
+function closeSelecOneCard() {
+    const sectionOneCard = document.querySelector('#selec-one-card');
+    sectionOneCard.style.display = 'none';
+}
 
 function resetGame() {
     document.location.reload(true);

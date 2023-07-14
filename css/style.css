@@ -58,7 +58,6 @@
     border-radius: 2px;
     cursor: pointer;
 }
-
 #main-play-btn:hover {
     background-color: var(--red-color);
 }
@@ -148,11 +147,11 @@
     border: 1px solid black;
     background-color: var(--blue-dark-color);
 }
-.card:last-child, #center-deck .card:last-child {
+.card:first-child, #center-deck .card:first-child {
     flex-shrink: 0;
 }
 
-.decks:hover .card:last-child, #center-deck:hover .card:last-child {
+.decks:hover .card:first-child, #center-deck:hover .card:first-child {
     flex-shrink: 1;
 } 
 #cards-container .card:hover, #cards-container #center-deck .card:hover {
