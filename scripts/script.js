@@ -13,7 +13,8 @@ const btnLoadPlay = document.querySelector('#btn-load-play');
 const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
 const btnResetGOver = document.querySelector('#btn-reset-gameover');
-const btnOKOneCard = document.querySelector('#btn-selec-one-card'); 
+const btnOKOneCard = document.querySelector('#btn-selec-one-card');
+const btnTabHist = document.querySelector('.hist-tab');
 const secLoading = document.querySelector('#loading');
 const secSelecCards = document.querySelector('.selected-cards');
 const secGameOver = document.querySelector('#gameover-sec'); 
@@ -55,6 +56,10 @@ btnLoadChoose.addEventListener('click', () => {
     getInfoPokemon();
 });
 
+btnTabHist.addEventListener('click', () => {
+    openCloseHistoric();
+});
+
 function ruffleIds(totalIds) {
     for (let i = 0; i < totalIds; i++) {
 
@@ -72,7 +77,7 @@ function ruffleIds(totalIds) {
         // Armazenando o número sorteado no vetor
         idsInGame.push(ruffledNumb);
     }
-}
+};
 
 function mainBoxDisplay(nPlayers) {
     if(nPlayers === 2) {
@@ -89,7 +94,7 @@ function mainBoxDisplay(nPlayers) {
         p2Pc.querySelector('#deck-2').style.flexDirection = 'row-reverse';
         document.querySelector(`#info-pl-2`).style.borderRight = '0';
     }
-}
+};
 
 async function getInfoPokemon() {
     pokemonList = await getPokemon(idsInGame);
@@ -114,7 +119,7 @@ function afterload() {
     btnGameOver.addEventListener('click', openCloseGameOver);
     btnResetGOver.addEventListener('click', resetGame);
     btnOKOneCard.addEventListener('click', closeSelecOneCard);
-}
+};
 
 function startGame() {
     countPlayers(numbPlayers);
@@ -138,7 +143,7 @@ function addNick(namePl1) {
     for(let i = 0; i < numbPlayers; i++) {
         tagsNames[i].innerText = namesPlyrs[i];
     }
-}
+};
 
 function countPlayers(nPlayers) {
     for(let i = 1; i < nPlayers + 1; i++) {
@@ -240,7 +245,7 @@ function defineAttribs() {
             attribPlayers[i].children[4].querySelector('.attrib-value').textContent = pokemonList[allListPl[i][0]].attribs[4];
         }
     }
-}
+};
 
 function openSelecCards() {
     if(numbPlayers > 1) {
@@ -343,22 +348,29 @@ function takeCards() {
 
 function compareValues(id) {
     let values = [];
+    let cardsNameCombat = [];
+
     for(let ap of attribPlayers) {
         if(ap != undefined) {
             if(idWinners.length > 1) {
                 if(idWinners.includes(attribPlayers.indexOf(ap)+1)) {
                     values.push(Number(ap.children[id].querySelector('.attrib-value').textContent));
+                    cardsNameCombat.push(cardsSelec[attribPlayers.indexOf(ap)].querySelector('.name-card').querySelector('p').textContent);
                 } else {
                     values.push(-Infinity);
+                    cardsNameCombat.push(null);
                 }
             } else {
                 values.push(Number(ap.children[id].querySelector('.attrib-value').textContent));
+                cardsNameCombat.push(cardsSelec[attribPlayers.indexOf(ap)].querySelector('.name-card').querySelector('p').textContent);
             }
         } else {
             values.push(-Infinity);
+            cardsNameCombat.push(null);
         }
     };
     
+    console.log(cardsNameCombat);
     const maxValue = values.reduce(function(a, b) {
         return Math.max(a, b);
     }, -Infinity);
@@ -373,11 +385,12 @@ function compareValues(id) {
         }
     };
 
+    defineTextResult(maxCount, id);
+    addTextHistoric(id, idWinners, cardsNameCombat);
+
     if(maxCount === 1) {
-        defineTextResult(maxCount, id);
         distrCard(idWinners, numberRoundCards(values));
     } else {
-        defineTextResult(maxCount, id);
         distrCard(0, numberRoundCards(values));
     }
     lastWinner(idWinners);
@@ -503,12 +516,52 @@ function openSelecOneCard(idCard) {
     atribsOneCard.children[2].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[2];
     atribsOneCard.children[3].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[3];
     atribsOneCard.children[4].querySelector('.attrib-value').textContent = pokemonList[allListPl[0][idCard]].attribs[4];
-}
+};
 
 function closeSelecOneCard() {
     const sectionOneCard = document.querySelector('#selec-one-card');
     sectionOneCard.style.display = 'none';
-}
+};
+
+function openCloseHistoric() {
+    const histClassList = btnTabHist.parentNode.classList;
+    histClassList.toggle('open');
+    if(histClassList.contains('open')) {
+        btnTabHist.querySelector('button').innerHTML = '\u2BC6';
+    } else {
+        btnTabHist.querySelector('button').innerHTML = '\u2BC5';
+    }
+};
+
+function addTextHistoric(atb, idWin, cNC) {
+    const attribText = document.querySelector(`#player-1`).querySelector('.attributes-card').children[atb].querySelector('.attrib-text').textContent;
+    let firstPartTxt = `${namesPlyrs[oldWinner-1]} escolheu o atributo ${attribText}.`
+    
+    let nameCardsCap = cNC.map(nm => nm != null ? nm.charAt(0).toUpperCase() + nm.slice(1) : null);
+    
+    let nameCardWin = nameCardsCap.filter((nm, index) => nm != null && idWinners.includes(index + 1));
+    let nameCardLose = nameCardsCap.filter((nm, index) => nm != null && !idWinners.includes(index + 1));
+    console.log(nameCardsCap);
+    console.log(nameCardWin);
+    console.log(nameCardLose);
+
+    let secondPartTxt = '';
+    if(idWin.length === 1) {
+        if(nameCardLose.length === 1) {
+            secondPartTxt = `${namesPlyrs[idWin-1]} tinha ${nameCardWin} e ganhou ${nameCardLose}.`;
+        } else {
+            secondPartTxt = `${namesPlyrs[idWin-1]} tinha ${nameCardWin} e ganhou ${nameCardLose.slice(0,-1).join(', ')} e ${nameCardLose.slice(-1)}.`;
+        }
+    } else if(idWin.length > 1) {
+        let nameWinners = idWin.map(ind => namesPlyrs[ind-1]);
+        secondPartTxt = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram com as cartas ${nameCardWin.slice(0,-1).join(', ')} e ${nameCardWin.slice(-1)}, respectivamente.`;
+    }
+    
+    const newText = document.createElement('p');
+    newText.innerText = firstPartTxt + ' ' + secondPartTxt;
+    const histContent = btnTabHist.parentNode.querySelector('.hist-content');
+    histContent.appendChild(newText);
+};
 
 function resetGame() {
     document.location.reload(true);
