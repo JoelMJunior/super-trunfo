@@ -2,10 +2,10 @@ Um jogo de super trunfo de Pokémon que consome a API: https://pokeapi.co/api/v2
 <br>
 Próximos passos:<br>
 > Colocar histórico dos resultados.<br> 
-CONTINUAR: Reveter a ordem dos textos, recentes em cima; Colocar o número da rodada nos textos; 
-Adicionar o texto do GameOver no histórico.<br>
+CONTINUAR: Adicionar o texto do GameOver no histórico. Colocar o número da rodada nos textos.<br>
 > Remover variável maxCount.<br>
 > Colocar estilo e cor na fonte do histórico.<br>
+> Analisar a ordem das cartas no deck depois da distribuição.<br>
 > Adicionar o nome dos Pokémons que estavam no Empate e foram ganhos.<br>
 > Trocar o 151 em ruffleIds por um valor de variável.<br>
 > Apresentar todas as cartas do jogador no início do jogo.<br>

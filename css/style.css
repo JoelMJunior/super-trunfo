@@ -259,7 +259,8 @@
     display: none;
 }
 .hist-container.open .hist-content {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
     width: 100%;
     height: calc(100% - 25px);
     text-align: left;
@@ -281,7 +282,10 @@
 .hist-container.open .hist-content p {
     margin-bottom: 5px;
 }
-.hist-container.open .hist-content p:not(:last-child) {
+.hist-container.open .hist-content p:not(:first-child) {
     border-bottom: 1px dotted black;
     padding-bottom: 5px;
+}
+.hist-container.open .hist-content p:first-child {
+    margin-bottom: auto;
 }
