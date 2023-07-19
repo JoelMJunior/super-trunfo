@@ -386,7 +386,7 @@ function compareValues(id) {
     };
 
     defineTextResult(maxCount, id);
-    addTextHistoric(id, idWinners, cardsNameCombat);
+    formatTextHistoric(id, idWinners, cardsNameCombat);
 
     if(maxCount === 1) {
         distrCard(idWinners, numberRoundCards(values));
@@ -484,20 +484,26 @@ function openCloseGameOver() {
 };
 
 function titleGameOver(idGO) {
+    let textGO;
     if(numbPlayers > 1) {
         if(idGO.length > 1) {
             let nameLoosers = idGO.map(ind => namesPlyrs[ind-1]);
-            textGameOver.querySelector('p').innerText = `${nameLoosers.slice(0,-1).join(', ')} e ${nameLoosers.slice(-1)} perderam`;
+            textGO = `${nameLoosers.slice(0,-1).join(', ')} e ${nameLoosers.slice(-1)} perderam`;
+            textGameOver.querySelector('p').innerText = textGO;
         } else if(idGO.length === 1) {
-            textGameOver.querySelector('p').innerText = `${namesPlyrs[idGO-1]} perdeu`;
+            textGO = `${namesPlyrs[idGO-1]} perdeu`;
+            textGameOver.querySelector('p').innerText = textGO;
         }
     } else if(numbPlayers === 1) {
         const indWin = decks.findIndex((indW) => { return indW != undefined });
-        textGameOver.querySelector('p').innerText = `${namesPlyrs[indWin]} ganhou o jogo`;
+        textGO = `${namesPlyrs[indWin]} ganhou o jogo`;
+        textGameOver.querySelector('p').innerText = textGO;
     } else if(numbPlayers === 0) {
         let nameWinners = idGO.map(ind => namesPlyrs[ind-1]);
-        textGameOver.querySelector('p').innerText = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram o jogo`;
+        textGO = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram o jogo`;
+        textGameOver.querySelector('p').innerText = textGO;
     }
+    addTextHistoric(textGO + '.');
 };
 
 function openSelecOneCard(idCard) {
@@ -533,7 +539,7 @@ function openCloseHistoric() {
     }
 };
 
-function addTextHistoric(atb, idWin, cNC) {
+function formatTextHistoric(atb, idWin, cNC) {
     const attribText = document.querySelector(`#player-1`).querySelector('.attributes-card').children[atb].querySelector('.attrib-text').textContent;
     let firstPartTxt = `${namesPlyrs[oldWinner-1]} escolheu o atributo ${attribText}.`
     
@@ -556,9 +562,13 @@ function addTextHistoric(atb, idWin, cNC) {
         let nameWinners = idWin.map(ind => namesPlyrs[ind-1]);
         secondPartTxt = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram com as cartas ${nameCardWin.slice(0,-1).join(', ')} e ${nameCardWin.slice(-1)}, respectivamente.`;
     }
-    
+    const textHist = firstPartTxt + ' ' + secondPartTxt;
+    addTextHistoric(textHist);
+};
+
+function addTextHistoric(txt) {
     const newText = document.createElement('p');
-    newText.innerText = firstPartTxt + ' ' + secondPartTxt;
+    newText.innerText = txt;
     const histContent = btnTabHist.parentNode.querySelector('.hist-content');
     histContent.appendChild(newText);
 };
