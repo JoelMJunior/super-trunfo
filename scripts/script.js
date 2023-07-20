@@ -3,6 +3,7 @@ import { getPokemon } from './servicePokemonApi.js';
 let numbPlayers = 4;
 let numbTotalCards = 16;
 let numbCardInit = 4;
+let rounds = 0;
 let namesPlyrs = [];
 let pokemonList = []; 
 let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
@@ -349,6 +350,7 @@ function takeCards() {
 function compareValues(id) {
     let values = [];
     let cardsNameCombat = [];
+    rounds += 1;
 
     for(let ap of attribPlayers) {
         if(ap != undefined) {
@@ -562,13 +564,13 @@ function formatTextHistoric(atb, idWin, cNC) {
         let nameWinners = idWin.map(ind => namesPlyrs[ind-1]);
         secondPartTxt = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram com as cartas ${nameCardWin.slice(0,-1).join(', ')} e ${nameCardWin.slice(-1)}, respectivamente.`;
     }
-    const textHist = firstPartTxt + ' ' + secondPartTxt;
+    const textHist = 'Rodada ' + rounds + ':<br>' + firstPartTxt + ' ' + secondPartTxt;
     addTextHistoric(textHist);
 };
 
 function addTextHistoric(txt) {
     const newText = document.createElement('p');
-    newText.innerText = txt;
+    newText.innerHTML = txt;
     const histContent = btnTabHist.parentNode.querySelector('.hist-content');
     histContent.appendChild(newText);
 };
