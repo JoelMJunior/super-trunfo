@@ -29,7 +29,6 @@ const attribPlayers = [];
 const textResult = document.querySelector('#text-result');
 const textGameOver = document.querySelector('#title-gameover');
 let idsInGame = [];
-let maxCount = 0;
 let idWinners = [];
 let oldWinner = 1;
 let idGameOverPl = [];
@@ -377,20 +376,18 @@ function compareValues(id) {
         return Math.max(a, b);
     }, -Infinity);
     
-    maxCount = 0;
     idWinners = [];
     
     for(let i = 0; i < values.length; i++) {
         if(values[i] === maxValue) {
-            maxCount++;
             idWinners.push(i+1);
         }
     };
 
-    defineTextResult(maxCount, id);
+    defineTextResult(idWinners.length, id);
     formatTextHistoric(id, idWinners, cardsNameCombat);
 
-    if(maxCount === 1) {
+    if(idWinners.length === 1) {
         distrCard(idWinners, numberRoundCards(values));
     } else {
         distrCard(0, numberRoundCards(values));
@@ -426,7 +423,6 @@ function lastWinner(winners) {
         }
         const indOW = Math.floor(Math.random() * auxIdPlayers.length);
         oldWinner = auxIdPlayers[indOW];
-        maxCount = 0;
     }
 };
 
