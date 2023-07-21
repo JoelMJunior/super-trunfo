@@ -289,3 +289,12 @@
 .hist-container.open .hist-content p:first-child {
     margin-bottom: auto;
 }
+
+.hist-content p .hist-name-winner {
+    color: var(--red-color);
+    font-weight: bold;
+}
+.hist-content p .hist-name-gameover {
+    color: var(--red-color);
+    font-weight: bold;
+}

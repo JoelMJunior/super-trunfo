@@ -505,7 +505,8 @@ function titleGameOver(idGO) {
         textGO = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram o jogo`;
         textGameOver.querySelector('p').innerText = textGO;
     }
-    addTextHistoric(textGO + '.');
+    const finalText = '<span class="hist-name-gameover">' + textGO + '.</span>';
+    addTextHistoric(finalText);
 };
 
 function openSelecOneCard(idCard) {
@@ -549,22 +550,21 @@ function formatTextHistoric(atb, idWin, cNC) {
     
     let nameCardWin = nameCardsCap.filter((nm, index) => nm != null && idWinners.includes(index + 1));
     let nameCardLose = nameCardsCap.filter((nm, index) => nm != null && !idWinners.includes(index + 1));
-    console.log(nameCardsCap);
-    console.log(nameCardWin);
-    console.log(nameCardLose);
+    const openSpanWin = '<span class="hist-name-winner">';
+    const closeSpanWin = '</span>';
 
     let secondPartTxt = '';
     if(idWin.length === 1) {
         if(nameCardLose.length === 1) {
-            secondPartTxt = `${namesPlyrs[idWin-1]} tinha ${nameCardWin} e ganhou ${nameCardLose}.`;
+            secondPartTxt = `${openSpanWin} ${namesPlyrs[idWin-1]} ${closeSpanWin} tinha ${nameCardWin} e ganhou ${nameCardLose}.`;
         } else {
-            secondPartTxt = `${namesPlyrs[idWin-1]} tinha ${nameCardWin} e ganhou ${nameCardLose.slice(0,-1).join(', ')} e ${nameCardLose.slice(-1)}.`;
+            secondPartTxt = `${openSpanWin} ${namesPlyrs[idWin-1]} ${closeSpanWin} tinha ${nameCardWin} e ganhou ${nameCardLose.slice(0,-1).join(', ')} e ${nameCardLose.slice(-1)}.`;
         }
     } else if(idWin.length > 1) {
         let nameWinners = idWin.map(ind => namesPlyrs[ind-1]);
-        secondPartTxt = `${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} empataram com as cartas ${nameCardWin.slice(0,-1).join(', ')} e ${nameCardWin.slice(-1)}, respectivamente.`;
+        secondPartTxt = `${openSpanWin} ${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} ${closeSpanWin} empataram com as cartas ${nameCardWin.slice(0,-1).join(', ')} e ${nameCardWin.slice(-1)}, respectivamente.`;
     }
-    const textHist = 'Rodada ' + rounds + ':<br>' + firstPartTxt + ' ' + secondPartTxt;
+    const textHist = '<u>Rodada ' + rounds + ':</u><br>' + firstPartTxt + ' ' + secondPartTxt;
     addTextHistoric(textHist);
 };
 

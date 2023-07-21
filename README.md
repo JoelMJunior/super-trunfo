@@ -1,11 +1,11 @@
 Um jogo de super trunfo de Pokémon que consome a API: https://pokeapi.co/api/v2/pokemon <br>
 <br>
 Próximos passos:<br>
-> Colocar estilo e cor na fonte do histórico.<br>
 > Fazer o scroll do histórico abrir no último texto.<br>
 > Remover variável maxCount.<br>
 > Analisar a ordem das cartas no deck depois da distribuição.<br>
 > Adicionar o nome dos Pokémons que estavam no Empate e foram ganhos.<br>
+> Avaliar colocar o texto do histórico em tópicos.<br>
 > Trocar o 151 em ruffleIds por um valor de variável.<br>
 > Apresentar todas as cartas do jogador no início do jogo.<br>
 > Colocar favicon.<br>
@@ -15,6 +15,7 @@ Próximos passos:<br>
 > Mudar a cor da label em cardsSelec do jogador vencedor da rodada.<br>
 > Ajustar responsividade.<br>
 
+> Melhorar o design.<br> 
 > Ajustar a transition do texto no histórico.<br>
 > Fazer o código funcionar com número de jogadores variável.<br>
 > Colocar tempo para cada parte do jogo (caso seja multiplayer).<br>
