@@ -8,6 +8,11 @@ let namesPlyrs = [];
 let pokemonList = []; 
 let listPl1=[], listPl2=[], listPl3=[], listPl4=[], listDraw=[];
 let allListPl=[listPl1, listPl2, listPl3, listPl4, listDraw];
+let idsInGame = [];
+let idWinners = [];
+let oldWinner = 1;
+let idGameOverPl = [];
+let nameCardDraw = [];
 const btnMainPlay = document.querySelector('#main-play-btn');
 const btnLoadChoose = document.querySelector('#btn-load-choose');
 const btnLoadPlay = document.querySelector('#btn-load-play');
@@ -28,10 +33,6 @@ const attribButtons1 = document.querySelector('#player-1').getElementsByClassNam
 const attribPlayers = [];
 const textResult = document.querySelector('#text-result');
 const textGameOver = document.querySelector('#title-gameover');
-let idsInGame = [];
-let idWinners = [];
-let oldWinner = 1;
-let idGameOverPl = [];
 
 
 btnLoadChoose.addEventListener('click', () => {
@@ -371,7 +372,6 @@ function compareValues(id) {
         }
     };
     
-    console.log(cardsNameCombat);
     const maxValue = values.reduce(function(a, b) {
         return Math.max(a, b);
     }, -Infinity);
@@ -443,8 +443,7 @@ function distrCard(idPlayer, cardsCount) {
         const deckWinner = document.querySelector(`#deck-${idPlayer}`);
         const numbCards = deckWinner.childElementCount;
         
-        let numbLD = listDraw.length; 
-        for(let i=0; i < numbLD; i++) {
+        for(let i=0; i < listDraw.length; i++) {
             allListPl[idPlayer-1].push(listDraw.shift()); 
         }
         for(let i = numbCards + 1; i < cardsCount + numbCards + numbCardsCenterDeck + 1; i++) {
@@ -546,19 +545,26 @@ function formatTextHistoric(atb, idWin, cNC) {
     
     let nameCardWin = nameCardsCap.filter((nm, index) => nm != null && idWinners.includes(index + 1));
     let nameCardLose = nameCardsCap.filter((nm, index) => nm != null && !idWinners.includes(index + 1));
+    
     const openSpanWin = '<span class="hist-name-winner">';
     const closeSpanWin = '</span>';
-
+    
     let secondPartTxt = '';
     if(idWin.length === 1) {
+        console.log(nameCardDraw);
+        nameCardDraw.forEach(el => nameCardLose.push(el));
         if(nameCardLose.length === 1) {
             secondPartTxt = `${openSpanWin} ${namesPlyrs[idWin-1]} ${closeSpanWin} tinha ${nameCardWin} e ganhou ${nameCardLose}.`;
         } else {
             secondPartTxt = `${openSpanWin} ${namesPlyrs[idWin-1]} ${closeSpanWin} tinha ${nameCardWin} e ganhou ${nameCardLose.slice(0,-1).join(', ')} e ${nameCardLose.slice(-1)}.`;
         }
+        nameCardDraw = [];
     } else if(idWin.length > 1) {
+        console.log(nameCardDraw);
         let nameWinners = idWin.map(ind => namesPlyrs[ind-1]);
+        nameCardsCap.map(el => nameCardDraw.push(el));
         secondPartTxt = `${openSpanWin} ${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} ${closeSpanWin} empataram com as cartas ${nameCardWin.slice(0,-1).join(', ')} e ${nameCardWin.slice(-1)}, respectivamente.`;
+        console.log(nameCardDraw);
     }
     const textHist = '<u>Rodada ' + rounds + ':</u><br>' + firstPartTxt + ' ' + secondPartTxt;
     addTextHistoric(textHist);

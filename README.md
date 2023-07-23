@@ -1,7 +1,8 @@
 Um jogo de super trunfo de Pokémon que consome a API: https://pokeapi.co/api/v2/pokemon <br>
 <br>
 Próximos passos:<br>
-> Adicionar o nome dos Pokémons que estavam no Empate e foram ganhos.<br>
+> Revisar erro: Cannot read properties of undefined (reading 'id') at defineAttribs (script.js:239:121)<br>
+> Às vezes repete a carta em seguida, mesmo quando o jogador a perde. Analisar se tem relação com o erro acima.<br>
 > Fazer o scroll do histórico abrir no último texto.<br>
 > Avaliar colocar o texto do histórico em tópicos.<br>
 > Trocar o 151 em ruffleIds por um valor de variável.<br>
