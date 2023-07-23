@@ -249,6 +249,7 @@ function defineAttribs() {
 };
 
 function openSelecCards() {
+    console.log(allListPl);
     if(numbPlayers > 1) {
         idGameOverPl = [];
         secSelecCards.style.display = 'block';
@@ -261,6 +262,7 @@ function openSelecCards() {
 };
 
 function closeSelecCards() {
+    console.log(allListPl);
     secSelecCards.style.display = 'none';  
     showAdvCards("off");
     disableBtn(attribButtons1.length);
@@ -272,6 +274,7 @@ function closeSelecCards() {
         openCloseGameOver();
     }
     defineAttribs();
+    console.log(allListPl);
 };
 
 function choseAttrib() {
@@ -443,8 +446,10 @@ function distrCard(idPlayer, cardsCount) {
         const deckWinner = document.querySelector(`#deck-${idPlayer}`);
         const numbCards = deckWinner.childElementCount;
         
-        for(let i=0; i < listDraw.length; i++) {
-            allListPl[idPlayer-1].push(listDraw.shift()); 
+        const auxLDCount = listDraw.length;
+        for(let i=0; i < auxLDCount; i++) {
+            allListPl[idPlayer-1].push(listDraw.shift());
+            console.log(i); 
         }
         for(let i = numbCards + 1; i < cardsCount + numbCards + numbCardsCenterDeck + 1; i++) {
             const card = document.createElement('div');
@@ -551,7 +556,6 @@ function formatTextHistoric(atb, idWin, cNC) {
     
     let secondPartTxt = '';
     if(idWin.length === 1) {
-        console.log(nameCardDraw);
         nameCardDraw.forEach(el => nameCardLose.push(el));
         if(nameCardLose.length === 1) {
             secondPartTxt = `${openSpanWin} ${namesPlyrs[idWin-1]} ${closeSpanWin} tinha ${nameCardWin} e ganhou ${nameCardLose}.`;
@@ -560,11 +564,9 @@ function formatTextHistoric(atb, idWin, cNC) {
         }
         nameCardDraw = [];
     } else if(idWin.length > 1) {
-        console.log(nameCardDraw);
         let nameWinners = idWin.map(ind => namesPlyrs[ind-1]);
         nameCardsCap.map(el => nameCardDraw.push(el));
         secondPartTxt = `${openSpanWin} ${nameWinners.slice(0,-1).join(', ')} e ${nameWinners.slice(-1)} ${closeSpanWin} empataram com as cartas ${nameCardWin.slice(0,-1).join(', ')} e ${nameCardWin.slice(-1)}, respectivamente.`;
-        console.log(nameCardDraw);
     }
     const textHist = '<u>Rodada ' + rounds + ':</u><br>' + firstPartTxt + ' ' + secondPartTxt;
     addTextHistoric(textHist);
