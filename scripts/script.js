@@ -20,6 +20,7 @@ const btnSelecCards = document.querySelector('#btn-selected-cards');
 const btnGameOver = document.querySelector('#btn-ok-gameover');
 const btnResetGOver = document.querySelector('#btn-reset-gameover');
 const btnOKOneCard = document.querySelector('#btn-selec-one-card');
+const btnBoardMob = document.querySelector('#btn-board-mobile');
 const btnTabHist = document.querySelector('.hist-tab');
 const secLoading = document.querySelector('#loading');
 const secSelecCards = document.querySelector('.selected-cards');
@@ -35,31 +36,36 @@ const textResult = document.querySelector('#text-result');
 const textGameOver = document.querySelector('#title-gameover');
 
 
-btnLoadChoose.addEventListener('click', () => {
-    const elemNumbCards = document.querySelector('#numb-cards');
-    const elemNumbPl = document.querySelector('#numb-players');
-    numbCardInit = Number(elemNumbCards.value);
-    numbPlayers = Number(elemNumbPl.value);
-    numbTotalCards = numbCardInit * numbPlayers;
-    elemNumbCards.setAttribute('disabled', '');
-    elemNumbPl.setAttribute('disabled', '');
-
-    const elemNick = document.querySelector('#nick');
-    elemNick.setAttribute('disabled', '');
-
-    btnLoadChoose.style.display = 'none';
-    loadIcon.style.visibility = 'visible';
-    btnLoadPlay.style.display = 'flex';
-
-    addNick(elemNick.value);
-    ruffleIds(numbTotalCards);
-    mainBoxDisplay(numbPlayers);
-    getInfoPokemon();
-});
-
-btnTabHist.addEventListener('click', () => {
-    openCloseHistoric();
-});
+addEvent();
+function addEvent() {
+    btnLoadChoose.addEventListener('click', () => {
+        const elemNumbCards = document.querySelector('#numb-cards');
+        const elemNumbPl = document.querySelector('#numb-players');
+        numbCardInit = Number(elemNumbCards.value);
+        numbPlayers = Number(elemNumbPl.value);
+        numbTotalCards = numbCardInit * numbPlayers;
+        elemNumbCards.setAttribute('disabled', '');
+        elemNumbPl.setAttribute('disabled', '');
+    
+        const elemNick = document.querySelector('#nick');
+        elemNick.setAttribute('disabled', '');
+    
+        btnLoadChoose.style.display = 'none';
+        loadIcon.style.visibility = 'visible';
+        btnLoadPlay.style.display = 'flex';
+    
+        addNick(elemNick.value);
+        ruffleIds(numbTotalCards);
+        mainBoxDisplay(numbPlayers);
+        getInfoPokemon();
+    });
+    btnTabHist.addEventListener('click', () => {
+        openCloseHistoric();
+    });
+    btnBoardMob.addEventListener('click', () => {
+        openCloseBoardPlayers();
+    });
+};
 
 function ruffleIds(totalIds) {
     for (let i = 0; i < totalIds; i++) {
@@ -86,14 +92,16 @@ function mainBoxDisplay(nPlayers) {
             document.querySelector(`#pc-${i}`).style.display = 'none';
             document.querySelector(`#info-pl-${i}`).style.display = 'none';
         }
-        const p2Pc = document.querySelector(`#pc-2`);
-        p2Pc.classList.replace('vertical', 'horizontal');
-        p2Pc.style.right = 'auto';
-        p2Pc.style.top = '0';
-        p2Pc.querySelector('.name-player').style.bottom = 'auto';
-        p2Pc.querySelector('.name-player').style.left = 'var(--distance-name-player)';
-        p2Pc.querySelector('#deck-2').style.flexDirection = 'row-reverse';
-        document.querySelector(`#info-pl-2`).style.borderRight = '0';
+        if(screen.width >= 768) {
+            const p2Pc = document.querySelector(`#pc-2`);
+            p2Pc.classList.replace('vertical', 'horizontal');
+            p2Pc.style.right = 'auto';
+            p2Pc.style.top = '0';
+            p2Pc.querySelector('.name-player').style.bottom = 'auto';
+            p2Pc.querySelector('.name-player').style.left = 'var(--distance-name-player)';
+            p2Pc.querySelector('#deck-2').style.flexDirection = 'row-reverse';
+            document.querySelector(`#info-pl-2`).style.borderRight = '0';
+        }
     }
 };
 
@@ -536,6 +544,16 @@ function openCloseHistoric() {
         btnTabHist.querySelector('button').innerHTML = '\u2BC6';
     } else {
         btnTabHist.querySelector('button').innerHTML = '\u2BC5';
+    }
+};
+
+function openCloseBoardPlayers() {
+    const boardPlyClsList = document.querySelector('.board-players').classList;
+    boardPlyClsList.toggle('open');
+    if(boardPlyClsList.contains('open')) {
+        btnBoardMob.querySelector('button').innerHTML = '\u2BC6';
+    } else {
+        btnBoardMob.querySelector('button').innerHTML = '\u2BC5';
     }
 };
 

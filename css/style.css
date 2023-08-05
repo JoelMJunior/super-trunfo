@@ -298,3 +298,8 @@
     color: var(--red-color);
     font-weight: bold;
 }
+
+/* /// BUTTON BOARD MOBILE /// */
+#btn-board-mobile {
+    display: none;
+}

@@ -4,6 +4,11 @@
     .load-container {
         width: 70%;
     }
+    #btn-load-choose {
+        width: 130px;
+        height: 40px;
+        font-size: 1.2em;
+    }
     #btn-load-play {
         width: 130px;
         height: 40px;
@@ -16,7 +21,7 @@
         height: 30px;
         margin: 5px auto 0 auto;
     }
-    label{
+    label {
         text-align: center;
     }   
     label[for=numb-players] {
@@ -65,6 +70,7 @@
         height: 70px;
         width: fit-content;
     }
+
     /* ///////  SELECTED CARDS    /////// */
     .selected-container {
         width: inherit;
@@ -97,6 +103,7 @@
         margin-top: 0;
         font-size: 1.25em;
     }
+
     /* ///////  GAME OVER SECTION    /////// */
     #title-gameover {
         font-size: 1.8em;
@@ -104,7 +111,6 @@
     #btn-reset-gameover button {
         margin-left: 1em;
     }
-
 }
 @media only screen and (max-width: 380px) {
 
@@ -112,19 +118,67 @@
     :root {
         --size-height-card: 100px;
         --size-width-card: 80px;
-        --width-form-card: 140px;
         --height-form-card: 200px;
+        --width-form-card: 140px;
+    }
+    #main-box {
+        width: 100dvw;
+        height: 100dvh;
+    }
+    #cards-container {
+        height: 95%;
     }
     #main-play-btn {
-        margin: 3px auto 0 auto;
+        margin: 10px auto 0 auto;
+    }
+    #pc-1 .name-player, #pc-2 .name-player, #pc-3 .name-player, #pc-4 .name-player, #center-cards-btn .name-player {
+        inset: auto;
+    }
+    .player-container, #center-cards-btn {
+        position: static;
     }
     .board-players {
-        position: static;
+        display: none;
+        position: absolute;
         margin-left: 0;
         margin-top: 0;
-        height: 65px;
+        height: 55px;
         font-size: 1em;
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: 10px;
     }
+    .board-players.open {
+        display: flex;
+    }
+    .info-player p {
+        margin-top: 5px;
+    }
+    #btn-board-mobile {
+        display: block;
+        position: absolute;
+        right: 100px;
+        bottom: 0;
+        margin: 0 10px 10px 0;
+    }
+    #btn-board-mobile div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90px;
+        height: 27px;
+        padding: 2px;
+        background-color: var(--white-color);
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+    }
+    #btn-board-mobile button {
+        border: 0;
+        background-color: #ffffff00;
+        margin-left: 5px;
+    }
+
     /* ///////  SELECTED CARDS    /////// */
     .only-cards {
         height: 75%;
