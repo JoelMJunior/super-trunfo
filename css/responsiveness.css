@@ -35,6 +35,10 @@
         --width-form-card: 200px;
         --height-form-card: 300px;
     }
+    #main-box {
+        width: 100dvw;
+        height: 100dvh;
+    }
     #cards-container {
         flex-direction: column;
         justify-content: space-evenly;
@@ -49,8 +53,11 @@
         width: var(--size-width-deck);
         height: var(--size-height-card);
     }
-    #pc-1 .name-player, #pc-2 .name-player, #pc-3 .name-player, #pc-4 .name-player {
+    #pc-1 .name-player, #pc-2 .name-player, #pc-3 .name-player, #pc-4 .name-player, #center-cards-btn .name-player {
         inset: auto;
+        background-color: var(--blue-dark-color);
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        padding: 3px 5px;
     }
     #deck-1, #deck-2, #deck-3, #deck-4 {
         flex-direction: row;
@@ -118,21 +125,14 @@
     :root {
         --size-height-card: 100px;
         --size-width-card: 80px;
-        --height-form-card: 200px;
+        --height-form-card: 210px;
         --width-form-card: 140px;
-    }
-    #main-box {
-        width: 100dvw;
-        height: 100dvh;
     }
     #cards-container {
         height: 95%;
     }
     #main-play-btn {
         margin: 10px auto 0 auto;
-    }
-    #pc-1 .name-player, #pc-2 .name-player, #pc-3 .name-player, #pc-4 .name-player, #center-cards-btn .name-player {
-        inset: auto;
     }
     .player-container, #center-cards-btn {
         position: static;
@@ -183,24 +183,34 @@
     .only-cards {
         height: 75%;
     }
+    .form-card.mobile {
+        width: 180px;
+        height: 270px;
+    }
+    .form-card.mobile .number-card p, .form-card.mobile .name-card p {
+        font-size: 1.1em;
+    }
+    .form-card.mobile .attrib-text, .form-card.mobile .attrib-value {
+        font-size: 1.1em;
+    }
     .tag-selec-card {
         font-size: 1em;
         margin-bottom: 0.5em;
     }
-    .number-card p {
+    .number-card p, .name-card p {
         font-size: 0.95em;
     }
-    .name-card p {
-        font-size: 0.95em;
+    .image-card {
+        height: 42.5%;
     }
     .image-card img {
-        width: 75px;
+        width: 80px;
         padding: 1px;
     }
-    .attrib-text {
-        font-size: 0.95em;
+    .attributes-card {
+        margin-top: 4.5px;
     }
-    .attrib-value {
+    .attrib-text, .attrib-value {
         font-size: 0.95em;
     }
     #text-result {

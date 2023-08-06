@@ -120,6 +120,7 @@ function afterload() {
             disableBtn(i);
             takeCards();
             compareValues(i);
+            formatSizeCardMobile();
         });
     }
     btnLoadPlay.addEventListener('click', startGame);
@@ -261,6 +262,7 @@ function openSelecCards() {
         idGameOverPl = [];
         secSelecCards.style.display = 'block';
         if(oldWinner === 1) {
+            formatSizeCardMobile();
             cardsSelec[0].style.display = 'flex';
         } else {
             choseAttrib();
@@ -280,7 +282,6 @@ function closeSelecCards() {
         openCloseGameOver();
     }
     defineAttribs();
-    console.log(allListPl);
 };
 
 function choseAttrib() {
@@ -595,6 +596,11 @@ function addTextHistoric(txt) {
     newText.innerHTML = txt;
     const histContent = btnTabHist.parentNode.querySelector('.hist-content');
     histContent.appendChild(newText);
+};
+
+function formatSizeCardMobile() {
+    const cdClassList = document.querySelector('#player-1').classList;
+    cdClassList.toggle('mobile');
 };
 
 function resetGame() {
