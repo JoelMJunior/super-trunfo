@@ -1,6 +1,6 @@
 :root{
-    --width-form-card: 250px;
-    --height-form-card: 375px;
+    --width-form-card: 220px;
+    --height-form-card: 330px;
 }
 
 .selected-cards {
@@ -100,7 +100,7 @@
 }
 
 .image-card img {
-    width: 130px;
+    width: 120px;
     padding: 8px;
     background-color: var(--yellow-color);
     border-radius: 50% 50%;
